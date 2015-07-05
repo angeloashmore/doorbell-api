@@ -37,7 +37,7 @@ module DB
   end
 
   def load_files
-    %w(models commands mappers relations).each { |dir| require_rel dir }
+    %w(relations models commands mappers).each { |dir| require_rel dir }
   end
 
   def root
