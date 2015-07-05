@@ -2,6 +2,7 @@ require 'rubygems'
 require 'bundler'
 require 'rom/sql/rake_task'
 require_relative 'db/db'
+require 'dotenv/tasks'
 
 Bundler.require
 
@@ -28,7 +29,7 @@ task routes: :environment do
 end
 
 namespace :db do
-  task :setup do
+  task setup: :dotenv do
     DB.setup
   end
 end

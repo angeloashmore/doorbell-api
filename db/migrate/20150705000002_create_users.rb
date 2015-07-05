@@ -11,6 +11,9 @@ ROM::SQL.migration do
       Boolean :professional, null: false, default: false
 
       Boolean :private, null: false, default: false
+
+      DateTime :created_at, null: false
+      DateTime :updated_at, null: false
     end
   end
 end
