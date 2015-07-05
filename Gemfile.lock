@@ -85,6 +85,7 @@ DEPENDENCIES
   rack-test
   rake (~> 10.4.2)
   rspec
+  virtus (~> 1.0.5)
 
 BUNDLED WITH
    1.10.5

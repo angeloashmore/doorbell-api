@@ -2,6 +2,7 @@ source 'https://rubygems.org'
 
 gem 'rack', '~> 1.6.0'
 gem 'grape'
+gem 'virtus', '~> 1.0.5'
 
 group :test do
   gem 'rspec'
