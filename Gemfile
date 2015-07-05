@@ -10,6 +10,7 @@ gem 'thin', '~> 1.6.3'
 group :development do
   gem 'rubocop', '~> 0.32.1'
   gem 'rake', '~> 10.4.2'
+  gem 'racksh', '~> 1.0.0'
 end
 
 group :test do

@@ -19,18 +19,21 @@ module DB
   private
 
   def production_settings
-    # require 'pg'
-    # host = ENV.fetch('POSTGRESQL_HOST')
-    # db = ENV.fetch('POSTGRESQL_DATABASE')
-    # user = ENV.fetch('POSTGRESQL_USER')
-    # password = ENV.fetch('POSTGRESQL_PASSWORD')
-    # uri = "postgres://#{host}/#{db}?user=#{user}&password=#{password}"
-    # ROM.setup(:sql, uri)
+    host = ENV.fetch('POSTGRESQL_HOST')
+    db = ENV.fetch('POSTGRESQL_DATABASE')
+    user = ENV.fetch('POSTGRESQL_USER')
+    password = ENV.fetch('POSTGRESQL_PASSWORD')
+    uri = "postgres://#{host}/#{db}?user=#{user}&password=#{password}"
+    ROM.setup(:sql, uri)
   end
 
   def dev_settings
-    # require 'pg'
-    ROM.setup(:sql, 'postgres://eyvynourvkdgwq:vuD0Fuw2epiB5hgIEF1ve_Fs1M@ec2-54-204-26-8.compute-1.amazonaws.com:5432/dbmtfp4u97uvbd')
+    host = ENV.fetch('POSTGRESQL_HOST')
+    db = ENV.fetch('POSTGRESQL_DATABASE')
+    user = ENV.fetch('POSTGRESQL_USER')
+    password = ENV.fetch('POSTGRESQL_PASSWORD')
+    uri = "postgres://#{host}/#{db}?user=#{user}&password=#{password}"
+    ROM.setup(:sql, uri)
   end
 
   def load_files
