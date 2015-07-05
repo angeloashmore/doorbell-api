@@ -2,8 +2,6 @@ source 'https://rubygems.org'
 
 gem 'rack', '~> 1.6.0'
 gem 'grape'
-gem 'mongoid', '~> 4.0.0'
-gem 'mongoid-enum'
 
 group :test do
   gem 'rspec'

@@ -1,9 +1,6 @@
 GEM
   remote: https://rubygems.org/
   specs:
-    activemodel (4.2.1)
-      activesupport (= 4.2.1)
-      builder (~> 3.1)
     activesupport (4.2.1)
       i18n (~> 0.7)
       json (~> 1.7, >= 1.7.7)
@@ -14,13 +11,11 @@ GEM
       descendants_tracker (~> 0.0.4)
       ice_nine (~> 0.11.0)
       thread_safe (~> 0.3, >= 0.3.1)
-    bson (2.3.0)
     builder (3.2.2)
     codeclimate-test-reporter (0.4.7)
       simplecov (>= 0.7.1, < 1.0.0)
     coercible (1.0.0)
       descendants_tracker (~> 0.0.1)
-    connection_pool (2.2.0)
     database_cleaner (1.4.1)
     descendants_tracker (0.0.4)
       thread_safe (~> 0.3, >= 0.3.1)
@@ -42,21 +37,8 @@ GEM
     ice_nine (0.11.1)
     json (1.8.2)
     minitest (5.6.1)
-    mongoid (4.0.2)
-      activemodel (~> 4.0)
-      moped (~> 2.0.0)
-      origin (~> 2.1)
-      tzinfo (>= 0.3.37)
-    mongoid-enum (0.2.0)
-      mongoid (~> 4.0)
-    moped (2.0.4)
-      bson (~> 2.2)
-      connection_pool (~> 2.0)
-      optionable (~> 0.2.0)
     multi_json (1.11.0)
     multi_xml (0.5.5)
-    optionable (0.2.0)
-    origin (2.1.1)
     rack (1.6.0)
     rack-accept (0.4.5)
       rack (>= 0.4)
@@ -99,9 +81,10 @@ DEPENDENCIES
   codeclimate-test-reporter
   database_cleaner
   grape
-  mongoid (~> 4.0.0)
-  mongoid-enum
   rack (~> 1.6.0)
   rack-test
   rake (~> 10.4.2)
   rspec
+
+BUNDLED WITH
+   1.10.5

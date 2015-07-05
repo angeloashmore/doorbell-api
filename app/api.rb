@@ -1,4 +1,4 @@
-module GrapeBootstrap
+module Doorbell
   class API < Grape::API
     version 'v1'
     format :json
@@ -11,6 +11,6 @@ module GrapeBootstrap
       }.to_json, e.status)
     end
 
-    mount GrapeBootstrap::PersonAPI
+    mount Doorbell::PersonAPI
   end
 end

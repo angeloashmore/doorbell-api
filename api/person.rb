@@ -1,4 +1,4 @@
-module GrapeBootstrap
+module Doorbell
   class PersonAPI < Grape::API
     resource :people do
       desc "Return a all people."
