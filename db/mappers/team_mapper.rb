@@ -1,5 +1,7 @@
-class TeamMapper < ROM::Mapper
-  relation :teams
+module Mappers
+  class Team < ROM::Mapper
+    relation :teams
 
-  model Team
+    model Team
+  end
 end

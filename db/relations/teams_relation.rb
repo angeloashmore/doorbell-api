@@ -1,7 +1,7 @@
-class TeamsRelation < ROM::Relation[:sql]
-  dataset :teams
-
-  def by_id(id)
-    where(id: id)
+module Relations
+  class Teams < ROM::Relation[:sql]
+    def by_id(id)
+      where(id: id)
+    end
   end
 end
