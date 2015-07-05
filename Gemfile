@@ -5,6 +5,7 @@ ruby '2.2.2'
 
 # Server requirements
 gem 'thin', '~> 1.6.3'
+gem 'dotenv', '~> 2.0.2'
 
 # Project requirements
 group :development do
