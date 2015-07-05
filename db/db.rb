@@ -1,6 +1,4 @@
 module DB
-  module_function
-
   def setup
     setup_connection_to_db
     load_files
@@ -42,4 +40,7 @@ module DB
   def root
     File.dirname(__FILE__)
   end
+
+  module_function :setup, :setup_connection_to_db, :production_settings,
+                  :dev_settings, :load_files, :root
 end
