@@ -1,5 +1,9 @@
 require 'rubygems'
 require 'bundler'
+require 'rom/sql/rake_task'
+require_relative 'db/db'
+
+Bundler.require
 
 begin
   Bundler.setup(:default, :development)
@@ -16,9 +20,15 @@ end
 
 desc "API Routes"
 task routes: :environment do
-  GrapeBootstrap::API.routes.each do |api|
+  Doorbell::API.routes.each do |api|
     method = api.route_method.ljust(10)
     path   = api.route_path
     puts "     #{method} #{path}"
+  end
+end
+
+namespace :db do
+  task :setup do
+    DB.setup
   end
 end

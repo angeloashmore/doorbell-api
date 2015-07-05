@@ -11,6 +11,6 @@ module Doorbell
       }.to_json, e.status)
     end
 
-    mount Doorbell::PersonAPI
+    mount Doorbell::TeamAPI
   end
 end
