@@ -15,7 +15,7 @@ describe GrapeBootstrap::PersonAPI do
     end
 
     context 'when there are people' do
-      let!(:person) { Person.create!({ name: 'Grape Bootstrap' }) }
+      let!(:person) { Person.create!(name: 'Grape Bootstrap') }
 
       it 'returns all people' do
         get '/v1/people'
@@ -26,7 +26,7 @@ describe GrapeBootstrap::PersonAPI do
   end
 
   describe 'GET /v1/person/:id' do
-    let(:person) { Person.create!({ name: 'Grape Bootstrap' }) }
+    let(:person) { Person.create!(name: 'Grape Bootstrap') }
 
     it 'returns a person by id' do
       get "/v1/person/#{person._id}"
@@ -53,7 +53,7 @@ describe GrapeBootstrap::PersonAPI do
   end
 
   describe 'PUT /v1/person/:id' do
-    let(:person) { Person.create!({ name: 'Grape Bootstrap' }) }
+    let(:person) { Person.create!(name: 'Grape Bootstrap') }
 
     context 'when id and name are present' do
       it 'update the person' do
@@ -65,7 +65,7 @@ describe GrapeBootstrap::PersonAPI do
 
     context 'when id is not present' do
       it 'returns error' do
-        put "/v1/person/", name: 'Grape running with Rack'
+        put '/v1/person/', name: 'Grape running with Rack'
 
         expect(last_response.body).to eql 'Not Found'
       end
@@ -81,7 +81,7 @@ describe GrapeBootstrap::PersonAPI do
   end
 
   describe 'DELETE /v1/person/:id' do
-    let(:person) { Person.create!({ name: 'Grape Bootstrap' }) }
+    let(:person) { Person.create!(name: 'Grape Bootstrap') }
 
     context 'when id is present' do
       it 'destroy the user' do
@@ -93,7 +93,7 @@ describe GrapeBootstrap::PersonAPI do
 
     context 'when id is not present' do
       it 'destroy the user' do
-        delete "/v1/person/"
+        delete '/v1/person/'
 
         expect(last_response.body).to eql 'Not Found'
       end

@@ -3,11 +3,9 @@ module Doorbell
     module V1
       module Helpers
         module Base
-
           def rom
             ROM.env
           end
-
         end
       end
     end

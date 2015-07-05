@@ -15,10 +15,10 @@ end
 
 task :environment do
   ENV['RACK_ENV'] ||= 'development'
-  require File.expand_path('../config/environment', __FILE__)
+  require_relative 'config/environment'
 end
 
-desc "API Routes"
+desc 'API Routes'
 task routes: :environment do
   Doorbell::API::Base.routes.each do |api|
     method = api.route_method.ljust(10)

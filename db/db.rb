@@ -1,5 +1,5 @@
 module DB
-  extend self
+  module_function
 
   def setup
     setup_connection_to_db
@@ -26,7 +26,8 @@ module DB
     # db = ENV.fetch('POSTGRESQL_DATABASE')
     # user = ENV.fetch('POSTGRESQL_USER')
     # password = ENV.fetch('POSTGRESQL_PASSWORD')
-    # ROM.setup(:sql, "postgres://#{host}/#{db}?user=#{user}&password=#{password}")
+    # uri = "postgres://#{host}/#{db}?user=#{user}&password=#{password}"
+    # ROM.setup(:sql, uri)
   end
 
   def dev_settings
@@ -35,10 +36,7 @@ module DB
   end
 
   def load_files
-    %w(models commands mappers relations).each do |dir|
-      paths = File.join(root, dir, '**', '*.rb')
-      Dir[paths].each{|file| require file}
-    end
+    %w(models commands mappers relations).each { |dir| require_rel dir }
   end
 
   def root
