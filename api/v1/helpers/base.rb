@@ -6,6 +6,10 @@ module Doorbell
           def rom
             ROM.env
           end
+
+          def declared_params
+            @declared_params ||= declared(params, include_missing: false)
+          end
         end
       end
     end

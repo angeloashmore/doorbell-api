@@ -5,14 +5,7 @@ module Doorbell
         # Common Grape settings.
         version 'v1'
         format :json
-
-        rescue_from Grape::Exceptions::Validation do |e|
-          Rack::Response.new({
-            status:  e.status,
-            message: e.message,
-            param:   e.param
-          }.to_json, e.status)
-        end
+        formatter :json, Grape::Formatter::Roar
 
         # Load global helpers.
         helpers Doorbell::API::V1::Helpers::Base
