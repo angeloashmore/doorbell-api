@@ -1,5 +1,6 @@
 module Mappers
-  class Team < ROM::Mapper
+  class TeamEntity < ROM::Mapper
+    register_as :entity
     relation :teams
 
     model Team

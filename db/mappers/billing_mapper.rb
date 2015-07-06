@@ -1,5 +1,6 @@
 module Mappers
-  class Billing < ROM::Mapper
+  class BillingEntity < ROM::Mapper
+    register_as :entity
     relation :billings
 
     model Billing

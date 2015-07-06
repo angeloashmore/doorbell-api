@@ -1,5 +1,6 @@
 module Mappers
-  class Plan < ROM::Mapper
+  class PlanEntity < ROM::Mapper
+    register_as :entity
     relation :plans
 
     model Plan
