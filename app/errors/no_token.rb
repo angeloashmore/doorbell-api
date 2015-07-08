@@ -1,0 +1,1 @@
+class NoTokenError < StandardError; end

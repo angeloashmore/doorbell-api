@@ -9,7 +9,7 @@ class User
     attribute :name, String
     attribute :professional, Boolean, default: false
 
-    attribute :created_at, Time
-    attribute :updated_at, Time
+    attribute :created_at, DateTime
+    attribute :updated_at, DateTime
   end
 end

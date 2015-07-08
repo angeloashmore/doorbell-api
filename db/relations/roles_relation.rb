@@ -7,8 +7,8 @@ module Relations
       where(id: id)
     end
 
-    def for_users(users)
-      where(user_id: users.map { |u| u.id })
+    def for_users(user_ids)
+      where(user_id: user_ids)
     end
 
     def for_teams(teams)

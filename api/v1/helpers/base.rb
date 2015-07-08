@@ -11,7 +11,7 @@ module Doorbell
             @declared_params ||= declared(params, include_missing: false)
           end
 
-          def validate_token
+          def validate_token!
             begin
               auth0_client_id = ENV['AUTH0_CLIENT_ID']
               auth0_client_secret = ENV['AUTH0_CLIENT_SECRET']
@@ -24,14 +24,20 @@ module Doorbell
 
               fail InvalidTokenError if auth0_client_id != decoded_token[0]["aud"]
 
-              @token = decoded_token
+              @token = decoded_token.first
             rescue JWT::DecodeError
               raise InvalidTokenError
             end
           end
 
-          def current_user
-            p @token
+          def current_user_id
+            fail NoTokenError if !@token
+
+            current_user_id = @token['sub']
+
+            fail InvalidTokenError if current_user_id.nil?
+
+            @current_user_id = current_user_id
           end
         end
       end
