@@ -5,6 +5,9 @@ module Doorbell
         resource :teams do
           desc 'Return all teams.'
           get do
+            validate_token
+            current_user
+
             teams = rom.relation(:teams)
             present teams.as(:entity).to_a, with: Doorbell::API::V1::Presenters::TeamsPresenter
           end
@@ -16,9 +19,9 @@ module Doorbell
           end
           post do
             create_team = rom.command(:teams).as(:entity).create
-            user = create_team.call(declared_params)
+            team = create_team.call(declared_params)
 
-            present user, with: Doorbell::API::V1::Presenters::TeamPresenter
+            present team, with: Doorbell::API::V1::Presenters::TeamPresenter
           end
         end
       end

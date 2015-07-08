@@ -9,4 +9,5 @@ require 'roar/json/hal'
 
 DB.setup
 
+require_rel '../app'
 require_rel '../api'

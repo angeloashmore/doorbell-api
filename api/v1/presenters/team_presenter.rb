@@ -3,17 +3,16 @@ module Doorbell
     module V1
       module Presenters
         module TeamPresenter
-          include Roar::JSON::HAL
-          include Roar::Hypermedia
+          include Roar::JSON
           include Grape::Roar::Representer
 
-          property :id, writable: false, type: String, desc: 'Team unique ID.'
+          property :id
 
-          property :name, type: String, desc: 'Team name.'
-          property :email, type: String, desc: 'Team email.'
+          property :name
+          property :email
 
-          property :created_at, type: DateTime, desc: 'Team created at datetime.'
-          property :updated_at, type: DateTime, desc: 'Team created at datetime.'
+          property :created_at
+          property :updated_at
         end
       end
     end

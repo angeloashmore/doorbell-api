@@ -3,12 +3,10 @@ module Doorbell
     module V1
       module Presenters
         module TeamsPresenter
-          include Roar::JSON::HAL
-          include Roar::Hypermedia
+          include Roar::JSON
           include Grape::Roar::Representer
-          # include Doorbell::API::V1::Presenters::PaginatedPresenter
 
-          collection :to_a, extend: TeamPresenter, as: :teams, embedded: true
+          collection :to_a, extend: TeamPresenter, as: :teams
         end
       end
     end
