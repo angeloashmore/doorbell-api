@@ -18,6 +18,7 @@ module Doorbell
 
         # Mount all resource APIs.
         mount Doorbell::API::V1::Profiles
+        mount Doorbell::API::V1::Roles
         mount Doorbell::API::V1::Teams
       end
     end

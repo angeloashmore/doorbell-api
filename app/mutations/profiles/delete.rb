@@ -7,7 +7,7 @@ module Doorbell
         end
 
         def execute
-          command = ROM.env.command(:profiles).as(:entity).delete.by_id(profile.id)
+          command = ROM.env.command(:profiles).delete.by_id(profile.id)
 
           command.transaction { command.call }
 

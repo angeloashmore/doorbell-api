@@ -12,12 +12,12 @@ module Doorbell
           command = ROM.env.command(:profiles).as(:entity).create
 
           command.transaction do
-            self.profile = command.call(user_id: user.id,
-                                        team_id: team.id,
-                                        private: inputs[:private])
+            @profile = command.call(user_id: user.id,
+                                    team_id: team.id,
+                                    private: inputs[:private])
           end
 
-          profile
+          @profile
         end
       end
     end
