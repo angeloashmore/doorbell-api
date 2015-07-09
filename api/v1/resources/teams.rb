@@ -37,15 +37,15 @@ module Doorbell
             get do
               validate_token!
 
-              @team = rom.relation(:team).as(:entity).by_id(params[:id])
+              @team = rom.relation(:teams).as(:entity).by_id(params[:id])
 
               present @team.one, with: Doorbell::API::V1::Presenters::TeamPresenter
             end
 
             desc 'Update a team.'
             params do
-              requires :name, type: String, allow_blank: false
-              requires :email, type: String, allow_blank: false
+              optional :name, type: String, allow_blank: false
+              optional :email, type: String, allow_blank: false
             end
             put do
               validate_token!
