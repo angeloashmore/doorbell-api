@@ -3,11 +3,10 @@ ROM::SQL.migration do
     create_table(:billings) do
       primary_key :id
 
-      foreign_key :plan_id, :plans, on_delete: :set_null
-      foreign_key :team_id, :teams, on_delete: :cascade
+      foreign_key :plan_id, :plans, null: false, index: true, on_delete: :set_null
+      foreign_key :team_id, :teams, index: true, on_delete: :cascade
 
-      Integer :user_id
-
+      String :user_id, index: true
       String :stripe_customer_id, null: false
 
       String :brand

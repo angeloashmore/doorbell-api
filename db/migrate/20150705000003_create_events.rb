@@ -1,9 +1,9 @@
 ROM::SQL.migration do
-  change do
+  up do
     create_table(:events) do
       primary_key :id
 
-      Integer :user_id, null: false
+      String :user_id, null: false, index: true
 
       String :location
       String :description
@@ -12,5 +12,18 @@ ROM::SQL.migration do
       DateTime :created_at, null: false
       DateTime :updated_at, null: false
     end
+
+    pgt_created_at(:events, :created_at)
+    pgt_updated_at(:events, :updated_at)
+  end
+
+  down do
+    drop_trigger(:events, "pgt_ua_updated_at", if_exists: true)
+    drop_function("pgt_ua_events__updated_at", if_exists: true)
+
+    drop_trigger(:events, "pgt_ca_created_at", if_exists: true)
+    drop_function("pgt_ca_events__created_at", if_exists: true)
+
+    drop_table(:events)
   end
 end

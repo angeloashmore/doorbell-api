@@ -2,13 +2,15 @@ class Plan
   include Virtus.value_object
 
   values do
+    attribute :id, Integer, writer: :private
+
     attribute :stripe_plan_id, String
 
     attribute :name, String
     attribute :type, String
 
-    attribute :created_at, Time
-    attribute :updated_at, Time
+    attribute :created_at, DateTime, writer: :private
+    attribute :updated_at, DateTime, writer: :private
   end
 
   def self.default_plan(type)

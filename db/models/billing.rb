@@ -5,12 +5,12 @@ class Billing
   values do
     attribute :id, Integer, writer: :private
 
-    attribute :plan_id, Integer, null: false
-    attribute :user_id, Integer
     attribute :plan_id, Integer
+    attribute :user_id, String
+    attribute :team_id, Integer
 
-    attribute :stripe_customer_id, String, null: false
-    attribute :email, String, null: false
+    attribute :stripe_customer_id, String
+    attribute :email, String
 
     attribute :brand, String
     attribute :last4, String
