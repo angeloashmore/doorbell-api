@@ -24,7 +24,7 @@ end
 # Framework requirements
 gem 'rack', '~> 1.6.0'
 gem 'rack-cors', '~> 0.4.0'
-gem 'grape', '~> 0.11.0'
+gem 'grape', '~> 0.12.0'
 gem 'roar', '~> 1.0.1', require: false
 gem 'grape-roar', '~> 0.3.0'
 gem 'kaminari', '~> 0.16.3', require: 'kaminari/grape'
