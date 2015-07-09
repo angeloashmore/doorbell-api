@@ -31,6 +31,7 @@ gem 'kaminari', '~> 0.16.3', require: 'kaminari/grape'
 
 # Authentication/Authorization requirements
 gem 'jwt', '~> 1.5.1'
+gem 'canable', '~> 0.3.0'
 
 # Persistence requirements
 gem 'virtus', '~> 1.0.5'

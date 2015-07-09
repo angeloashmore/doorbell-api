@@ -2,12 +2,13 @@ module Doorbell
   module API
     module V1
       class Teams < Grape::API
+        helpers Canable::Enforcers
+
         resource :teams do
-          desc 'Return all teams.'
+          desc 'Return all teams for current user.'
           get do
             validate_token!
-
-            teams = rom.relation(:teams).as(:entity).for_user(current_user_id)
+            teams = rom.relation(:teams).as(:entity).for_user(current_user.id)
             present teams.to_a, with: Doorbell::API::V1::Presenters::TeamsPresenter
           end
 
@@ -18,14 +19,14 @@ module Doorbell
           end
           post do
             validate_token!
+            enforce_create_permission(Team.new)
 
             create_team = rom.command(:teams).as(:entity).create
             create_role = rom.command(:roles).create
-
             create_team.transaction do
               @team = create_team.call(declared_params)
               create_role.call(team_id: @team.id,
-                               user_id: current_user_id,
+                               user_id: current_user.id,
                                name: "owner")
             end
 
@@ -33,13 +34,15 @@ module Doorbell
           end
 
           route_param :id do
+            before do
+              @team = rom.relation(:teams).as(:entity).by_id(params[:id]).one
+            end
+
             desc 'Return a team.'
             get do
               validate_token!
-
-              @team = rom.relation(:teams).as(:entity).by_id(params[:id])
-
-              present @team.one, with: Doorbell::API::V1::Presenters::TeamPresenter
+              enforce_view_permission(@team, 'Can only be viewed by members.')
+              present @team, with: Doorbell::API::V1::Presenters::TeamPresenter
             end
 
             desc 'Update a team.'
@@ -49,9 +52,9 @@ module Doorbell
             end
             put do
               validate_token!
+              enforce_update_permission(@team, 'Can only be updated by owners and admins.')
 
-              update_team = rom.command(:teams).as(:entity).update.by_id(params[:id])
-
+              update_team = rom.command(:teams).as(:entity).update.by_id(@team.id)
               update_team.transaction do
                 @team = update_team.call(declared_params)
               end
@@ -62,10 +65,10 @@ module Doorbell
             desc 'Delete a team.'
             delete do
               validate_token!
+              enforce_delete_permission(@team, 'Can only be deleted by owners.')
 
               delete_team = rom.command(:teams).as(:entity).delete.by_id(params[:id])
               delete_roles = rom.command(:roles).delete.for_team(params[:id])
-
               delete_team.transaction do
                 @team = delete_team.call
                 delete_roles.call

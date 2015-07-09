@@ -28,6 +28,7 @@ GEM
       ice_nine (~> 0.11.0)
       thread_safe (~> 0.3, >= 0.3.1)
     builder (3.2.2)
+    canable (0.3.0)
     codeclimate-test-reporter (0.4.7)
       simplecov (>= 0.7.1, < 1.0.0)
     coercible (1.0.0)
@@ -157,6 +158,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  canable (~> 0.3.0)
   codeclimate-test-reporter
   database_cleaner
   dotenv (~> 2.0.2)

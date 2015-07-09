@@ -7,7 +7,7 @@ class Role
     attribute :team_id, Integer
     attribute :user_id, String
 
-    attribute :names, Array[String]
+    attribute :name, String
 
     attribute :created_at, DateTime, writer: :private
     attribute :updated_at, DateTime, writer: :private

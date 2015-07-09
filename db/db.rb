@@ -8,7 +8,7 @@ module DB
   end
 
   def setup_connection_to_db
-    case ENV.fetch('RACK_ENV', 'development')
+    case ENV['RACK_ENV']
     when 'production'
       production_settings
     else

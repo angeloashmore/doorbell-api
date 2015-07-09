@@ -4,9 +4,5 @@ module Mappers
     relation :roles
 
     model Role
-
-    fold :names do
-      attribute :name
-    end
   end
 end
