@@ -1,21 +1,58 @@
 class Billing
   include Virtus.value_object
+  include Canable::Ables
 
   values do
+    attribute :id, Integer, writer: :private
+
+    attribute :plan_id, Integer, null: false
     attribute :user_id, Integer
-    attribute :team_id, Integer
+    attribute :plan_id, Integer
 
-    attribute :plan_id, Plan
-
-    attribute :stripe_customer_id, String
-    attribute :email, String
+    attribute :stripe_customer_id, String, null: false
+    attribute :email, String, null: false
 
     attribute :brand, String
     attribute :last4, String
     attribute :exp_month, String
     attribute :exp_year, String
 
-    attribute :created_at, Time
-    attribute :updated_at, Time
+    attribute :created_at, DateTime, writer: :private
+    attribute :updated_at, DateTime, writer: :private
+  end
+
+  def type
+    return :user if !user_id.nil?
+    return :team if !team_id.nil?
+    fail UnknownTypeError
+  end
+
+  def viewable_by?(user)
+    case type
+    when :user
+      user_id == user.id
+    when :team
+      roles = ROM.env.relation(:roles).as(:entity).for_team(team_id).for_user(user.id)
+      !roles.to_a.empty?
+    else
+      false
+    end
+  end
+
+  def updatable_by?(user)
+    case type
+    when :user
+      user_id == user.id
+    when :team
+      roles = ROM.env.relation(:roles).as(:entity).for_team(team_id).for_user(user.id)
+      role_names = roles.to_a.map { |r| r.name }
+      !(role_names & ['owner', 'billing']).empty?
+    else
+      false
+    end
+  end
+
+  def deletable_by?(user)
+    false
   end
 end

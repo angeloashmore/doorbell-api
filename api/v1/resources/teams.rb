@@ -21,11 +21,14 @@ module Doorbell
 
             create_team = rom.command(:teams).as(:entity).create
             create_role = rom.command(:roles).create
+            create_billing = rom.command(:billing).create
             create_team.transaction do
               @team = create_team.call(declared_params)
               create_role.call(team_id: @team.id,
                                user_id: current_user.id,
                                name: "owner")
+              create_billing.call(team_id: @team.id,
+                                  plan_id: Plan.default_plan(:team))
             end
 
             present @team, with: Doorbell::API::V1::Presenters::TeamPresenter
