@@ -7,6 +7,11 @@ module Doorbell
         format :json
         formatter :json, Grape::Formatter::Roar
 
+        # Define global rescuers.
+        rescue_from :all do |e|
+          error!(e.message)
+        end
+
         # Load global helpers.
         helpers Canable::Enforcers
         helpers Doorbell::API::V1::Helpers::Base

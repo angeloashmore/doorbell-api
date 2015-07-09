@@ -2,8 +2,11 @@ module Doorbell
   module Mutation
     module Teams
       class Update < Mutations::Command
-        optional do
+        required do
           model :team
+        end
+
+        optional do
           string :name
           string :email
         end

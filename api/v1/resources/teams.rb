@@ -15,8 +15,8 @@ module Doorbell
 
           desc 'Create a team.'
           post do
-            args = params.to_h.merge({ user: current_user })
-            team = Mutation::Teams::Create.run!(args)
+            enforce_create_permission(Team.new, 'Team limit reached.')
+            team = Mutation::Teams::Create.run!(params.to_h.merge(user: current_user))
             present team, with: Presenters::TeamPresenter
           end
 
@@ -34,8 +34,7 @@ module Doorbell
             desc 'Update a team.'
             put do
               enforce_update_permission(@team, 'Can only be updated by owners and admins.')
-              args = params.merge({ team: @team })
-              team = Mutation::Teams::Update.run!(args)
+              team = Mutation::Teams::Update.run!(params.to_h.merge(team: @team))
               present team, with: Presenters::TeamPresenter
             end
 

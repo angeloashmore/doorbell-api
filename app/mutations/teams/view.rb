@@ -9,7 +9,7 @@ module Doorbell
 
         def execute
           if id_present?
-            relation = ROM.env.relation(:teams).as(:entity).for_id(id)
+            relation = ROM.env.relation(:teams).as(:entity).by_id(id)
             return relation.one
           end
 
@@ -17,6 +17,8 @@ module Doorbell
             relation = ROM.env.relation(:teams).as(:entity).for_user(user.id)
             return relation.to_a
           end
+
+          fail Mutations::ValidationException
         end
       end
     end
