@@ -1,6 +1,6 @@
 module Doorbell
   module Mutation
-    module Teams
+    module Profiles
       class View < Mutations::Command
         optional do
           integer :id
@@ -8,17 +8,16 @@ module Doorbell
         end
 
         def execute
-          teams = ROM.env.relation(:teams).as(:entity_with_roles)
-          roles = ROM.env.relation(:roles)
+          profiles = ROM.env.relation(:profiles).as(:entity)
 
           if id_present?
-            team = teams.by_id(id).combine(roles.for_team)
-            return team.one
+            profile = profiles.by_id(id)
+            return profile.one
           end
 
           if user_present?
-            teams = teams.for_user(user).combine(roles.for_teams)
-            return teams.to_a
+            profiles = profiles.for_user(user)
+            return profiles.to_a
           end
 
           fail Mutations::ValidationException

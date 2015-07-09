@@ -7,8 +7,12 @@ module Relations
       where(id: id)
     end
 
-    def for_user(user)
-      qualified.left_join(:roles, team_id: :id).where(roles__user_id: user.id).group(:teams__id)
+    def for_users(users)
+      qualified
+        .left_join(:roles, team_id: :id)
+        .where(roles__user_id: Array.wrap(users).map { |u| u[:id] })
+        .group(:teams__id)
     end
+    alias_method :for_user, :for_users
   end
 end
