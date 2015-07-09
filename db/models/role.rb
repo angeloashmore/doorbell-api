@@ -4,9 +4,7 @@ class Role
   values do
     attribute :id, Integer, writer: :private
 
-    attribute :resource_type, String
-    attribute :resource_id, Integer
-
+    attribute :team_id, Integer
     attribute :user_id, String
 
     attribute :names, Array[String]

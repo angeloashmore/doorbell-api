@@ -3,8 +3,7 @@ ROM::SQL.migration do
     create_table(:roles) do
       primary_key :id
 
-      String :resource_type, null: false
-      Integer :resource_id, null: false
+      Integer :team_id, null: false
 
       String :user_id, null: false
 

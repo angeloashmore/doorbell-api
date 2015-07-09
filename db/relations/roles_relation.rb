@@ -10,9 +10,11 @@ module Relations
     def for_users(user_ids)
       where(user_id: user_ids)
     end
+    alias_method :for_user, :for_users
 
-    def for_teams(teams)
-      where(resource_type: "team", team_id: teams.map { |t| t.id })
+    def for_teams(team_ids)
+      where(team_id: team_ids)
     end
+    alias_method :for_team, :for_teams
   end
 end
