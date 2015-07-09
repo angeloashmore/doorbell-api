@@ -3,9 +3,9 @@ ROM::SQL.migration do
     create_table(:roles) do
       primary_key :id
 
-      Integer :team_id, null: false
+      foreign_key :team_id, :teams, on_delete: :cascade
 
-      String :user_id, null: false
+      String :user_id, null: false, index: true
 
       String :name, null: false
 

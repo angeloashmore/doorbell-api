@@ -8,6 +8,7 @@ module Doorbell
         formatter :json, Grape::Formatter::Roar
 
         # Load global helpers.
+        helpers Canable::Enforcers
         helpers Doorbell::API::V1::Helpers::Base
 
         # Mount all resource APIs.

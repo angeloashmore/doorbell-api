@@ -2,11 +2,12 @@ ROM::SQL.migration do
   up do
     create_table(:teams) do
       primary_key :id
+
       String :name, null: false
       String :email, null: false
 
-      DateTime :created_at
-      DateTime :updated_at
+      DateTime :created_at, null: false
+      DateTime :updated_at, null: false
     end
 
     pgt_created_at(:teams, :created_at)

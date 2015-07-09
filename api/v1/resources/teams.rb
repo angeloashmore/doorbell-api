@@ -2,8 +2,6 @@ module Doorbell
   module API
     module V1
       class Teams < Grape::API
-        helpers Canable::Enforcers
-
         resource :teams do
           desc 'Return all teams for current user.'
           get do
@@ -68,10 +66,8 @@ module Doorbell
               enforce_delete_permission(@team, 'Can only be deleted by owners.')
 
               delete_team = rom.command(:teams).as(:entity).delete.by_id(params[:id])
-              delete_roles = rom.command(:roles).delete.for_team(params[:id])
               delete_team.transaction do
                 @team = delete_team.call
-                delete_roles.call
               end
 
               present @team, with: Doorbell::API::V1::Presenters::TeamPresenter
