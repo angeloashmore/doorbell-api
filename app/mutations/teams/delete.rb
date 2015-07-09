@@ -7,13 +7,11 @@ module Doorbell
         end
 
         def execute
-          delete_team = ROM.env.command(:teams).as(:entity).delete.by_id(team.id)
+          command = ROM.env.command(:teams).as(:entity).delete.by_id(team.id)
 
-          delete_team.transaction do
-            @team = delete_team.call
-          end
+          command.transaction { command.call }
 
-          @team
+          team
         end
       end
     end

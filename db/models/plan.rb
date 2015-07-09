@@ -4,8 +4,6 @@ class Plan
   values do
     attribute :id, Integer, writer: :private
 
-    attribute :stripe_plan_id, String
-
     attribute :name, String
     attribute :type, String
 
@@ -13,12 +11,21 @@ class Plan
     attribute :updated_at, DateTime, writer: :private
   end
 
-  def self.default_plan(type)
+  def stripe_plan_id
+    underscore = -> (s) { s.gsub(' ', '_').upcase }
+
+    type = underscore.call(type)
+    name = underscore.call(name)
+
+    "#{type}__#{name}"
+  end
+
+  def self.default_for(type)
     case type
     when :user
-      return ROM.env.relation(:plans).as(:entity).by_stripe_plan_id('USER__FREE').one
+      return ROM.env.relation(:plans).as(:entity).default(:user).one
     when :team
-      return ROM.env.relation(:plans).as(:entity).by_stripe_plan_id('TEAM__FREE').one
+      return ROM.env.relation(:plans).as(:entity).default(:team).one
     end
   end
 end

@@ -4,6 +4,7 @@ module Doorbell
       class Create < Mutations::Command
         required do
           model :user
+          model :plan, default: Plan.default_for(:team)
           string :name
           string :email
         end
@@ -14,18 +15,18 @@ module Doorbell
           create_billing = ROM.env.command(:billings).create
 
           create_team.transaction do
-            @team = create_team.call(inputs.except(:user))
+            @team = create_team.call(inputs.except(:user, :plan))
 
             create_role.call(team_id: @team.id,
                              user_id: user.id,
                              name: "owner")
 
             create_billing.call(team_id: @team.id,
-                                plan_id: Plan.default_plan(:team),
+                                plan_id: plan.id,
                                 stripe_customer_id: "123")
           end
 
-          @team
+          View.run!(id: @team.id)
         end
       end
     end

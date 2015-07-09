@@ -12,13 +12,11 @@ module Doorbell
         end
 
         def execute
-          update_team = ROM.env.command(:teams).as(:entity).update.by_id(team.id)
+          command = ROM.env.command(:teams).as(:entity).update.by_id(team.id)
 
-          update_team.transaction do
-            @team = update_team.call(inputs.except(:team))
-          end
+          command.transaction { command.call(inputs.except(:team)) }
 
-          @team
+          View.run!(id: team.id)
         end
       end
     end

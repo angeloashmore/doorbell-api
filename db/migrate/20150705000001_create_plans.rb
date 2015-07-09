@@ -3,8 +3,6 @@ ROM::SQL.migration do
     create_table(:plans) do
       primary_key :id
 
-      String :stripe_plan_id, null: false
-
       String :name, null: false
       String :type, null: false
 

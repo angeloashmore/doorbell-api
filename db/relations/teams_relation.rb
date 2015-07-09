@@ -7,8 +7,8 @@ module Relations
       where(id: id)
     end
 
-    def for_user(user_id)
-      qualified.inner_join(:roles, team_id: :id).where(roles__user_id: user_id)
+    def for_user(user)
+      qualified.left_join(:roles, team_id: :id).where(roles__user_id: user.id).group(:teams__id)
     end
   end
 end

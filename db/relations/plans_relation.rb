@@ -7,8 +7,19 @@ module Relations
       where(id: id)
     end
 
-    def by_stripe_plan_id(stripe_plan_id)
-      where(stripe_plan_id: stripe_plan_id)
+    def default(type)
+      query = where(name: 'Default')
+
+      case type
+      when :user
+        query = query.where(type: 'user')
+      when :team
+        query = query.where(type: 'team')
+      else
+        fail UnknownTypeError
+      end
+
+      query
     end
   end
 end

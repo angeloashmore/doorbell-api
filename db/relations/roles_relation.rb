@@ -7,13 +7,13 @@ module Relations
       where(id: id)
     end
 
-    def for_users(user_ids)
-      where(user_id: user_ids)
+    def for_users(users)
+      where(user_id: users.map { |u| u[:id] })
     end
     alias_method :for_user, :for_users
 
-    def for_teams(team_ids)
-      where(team_id: team_ids)
+    def for_teams(teams)
+      where(team_id: teams.map { |t| t[:id] })
     end
     alias_method :for_team, :for_teams
   end

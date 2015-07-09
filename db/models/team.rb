@@ -8,24 +8,22 @@ class Team
     attribute :name, String
     attribute :email, String
 
+    attribute :roles, Array[Role]
+
     attribute :created_at, DateTime, writer: :private
     attribute :updated_at, DateTime, writer: :private
   end
 
   def viewable_by?(user)
-    roles = ROM.env.relation(:roles).as(:entity).for_team(id).for_user(user.id)
-    !roles.to_a.empty?
+    roles.map { |r| r.user_id }.include?(user.id)
   end
 
   def updatable_by?(user)
-    roles = ROM.env.relation(:roles).as(:entity).for_team(id).for_user(user.id)
-    role_names = roles.to_a.map { |r| r.name }
-    !(role_names & ["owner", "admin"]).empty?
+    role_names = roles.select { |r| r.user_id == user.id }.map { |r| r.name }
+    !(role_names & ['owner', 'admin']).empty?
   end
 
   def deletable_by?(user)
-    roles = ROM.env.relation(:roles).as(:entity).for_team(id).for_user(user.id)
-    role_names = roles.to_a.map { |r| r.name }
-    role_names.include?("owner")
+    roles.select { |r| r.user_id == user.id }.map { |r| r.name }.include?('owner')
   end
 end
