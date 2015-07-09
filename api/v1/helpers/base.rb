@@ -3,14 +3,6 @@ module Doorbell
     module V1
       module Helpers
         module Base
-          def rom
-            ROM.env
-          end
-
-          def declared_params
-            @declared_params ||= declared(params, include_missing: false)
-          end
-
           def validate_token!
             begin
               auth0_client_id = ENV['AUTH0_CLIENT_ID']

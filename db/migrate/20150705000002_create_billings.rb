@@ -4,7 +4,7 @@ ROM::SQL.migration do
       primary_key :id
 
       foreign_key :plan_id, :plans, on_delete: :set_null
-      foreign_key :team_id, :billings, on_delete: :cascade
+      foreign_key :team_id, :teams, on_delete: :cascade
 
       Integer :user_id
 

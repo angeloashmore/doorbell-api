@@ -70,6 +70,8 @@ GEM
     minitest (5.6.1)
     multi_json (1.11.0)
     multi_xml (0.5.5)
+    mutations (0.7.2)
+      activesupport
     nokogiri (1.6.6.2)
       mini_portile (~> 0.6.0)
     parser (2.2.2.6)
@@ -166,6 +168,7 @@ DEPENDENCIES
   grape-roar (~> 0.3.0)
   jwt (~> 1.5.1)
   kaminari (~> 0.16.3)
+  mutations (~> 0.7.2)
   pg (~> 0.18.2)
   rack (~> 1.6.0)
   rack-cors (~> 0.4.0)
