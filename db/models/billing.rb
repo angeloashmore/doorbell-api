@@ -6,8 +6,8 @@ class Billing
     attribute :id, Integer, writer: :private
 
     attribute :plan_id, Integer
-    attribute :user_id, String
-    attribute :team_id, Integer
+    attribute :relation_type, String
+    attribute :relation_id, String
 
     attribute :stripe_customer_id, String
     attribute :email, String

@@ -14,5 +14,8 @@ DB.setup
 # Add delete as a canable action.
 Canable.add(:delete, :deletable)
 
+# Set Stripe API key.
+Stripe.api_key = ENV['STRIPE_SECRET_KEY']
+
 require_rel '../app'
 require_rel '../api'

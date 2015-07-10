@@ -17,6 +17,7 @@ module Doorbell
         helpers Doorbell::API::V1::Helpers::Base
 
         # Mount all resource APIs.
+        mount Doorbell::API::V1::Billings
         mount Doorbell::API::V1::Profiles
         mount Doorbell::API::V1::Roles
         mount Doorbell::API::V1::Teams

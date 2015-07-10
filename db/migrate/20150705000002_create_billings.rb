@@ -4,10 +4,12 @@ ROM::SQL.migration do
       primary_key :id
 
       foreign_key :plan_id, :plans, null: false, index: true, on_delete: :set_null
-      foreign_key :team_id, :teams, index: true, on_delete: :cascade
 
-      String :user_id, index: true
+      String :relation_type, null: false
+      String :relation_id, null: false, index: true
+
       String :stripe_customer_id, null: false
+      String :email, null: false
 
       String :brand
       String :last4

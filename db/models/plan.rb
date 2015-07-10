@@ -12,12 +12,7 @@ class Plan
   end
 
   def stripe_plan_id
-    underscore = -> (s) { s.gsub(' ', '_').upcase }
-
-    type = underscore.call(type)
-    name = underscore.call(name)
-
-    "#{type}__#{name}"
+    "#{type}__#{name}".gsub(' ', '_').upcase
   end
 
   def self.default_for(type)

@@ -43,3 +43,5 @@ gem 'sequel_postgresql_triggers', '~> 1.0.8'
 
 # Other requirements
 gem 'require_all', '~> 1.3.2'
+gem 'email_regex', '~> 0.0.1'
+gem 'stripe', '~> 1.23.0'
