@@ -39,6 +39,10 @@ class Billing
     end
   end
 
+  def creatable_by?(user)
+    false
+  end
+
   def updatable_by?(user)
     case type
     when :user

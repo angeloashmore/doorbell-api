@@ -8,6 +8,10 @@ module Doorbell
         formatter :json, Grape::Formatter::Roar
 
         # Define global rescuers.
+        rescue_from InvalidTokenError do |e|
+          error!('Invalid authentication token', 401)
+        end
+
         # rescue_from :all do |e|
         #   error!(e.message)
         # end

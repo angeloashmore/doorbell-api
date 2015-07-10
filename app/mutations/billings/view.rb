@@ -11,13 +11,14 @@ module Doorbell
           billings = ROM.env.relation(:billings).as(:entity)
 
           if id_present?
-            billing = billigns.by_id(id)
+            billing = billings.by_id(id)
             return billing.one
           end
 
           if user_present?
-            billings = billings.for_type(:user).for_relation(user)
-            return billings.to_a
+            for_user = billings.for_type(:user).for_relation(user).as(:entity)
+            for_teams = billings.for_teams_accessible_by_user(user).as(:entity)
+            return for_user.to_a + for_teams.to_a
           end
 
           fail Mutations::ValidationException

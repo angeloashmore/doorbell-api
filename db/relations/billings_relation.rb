@@ -14,14 +14,14 @@ module Relations
     alias_method :for_relation, :for_relations
 
     def for_types(types)
-      where(relation_type: Array.wrap(types).map { |t| t.to_s })
+      where(relation_type: Array.wrap(types).map { |t| t.to_s.classify })
     end
     alias_method :for_type, :for_types
 
     def for_teams_accessible_by_users(users)
       qualified
-        .where(relation_type: 'Team')
-        .inner_join(:roles, team_id: :relation_id)
+        .where(relation_type: 'team')
+        .inner_join(:roles, Sequel.cast(:team_id, String) => :relation_id)
         .where(roles__user_id: Array.wrap(users).map { |u| u[:id] })
         .group(:billings__id)
     end

@@ -6,7 +6,7 @@ module Doorbell
           include Roar::JSON
           include Grape::Roar::Representer
 
-          collection :to_a, extend: BillingsPresenter, as: :billings
+          collection :to_a, extend: BillingPresenter, as: :billings
         end
       end
     end

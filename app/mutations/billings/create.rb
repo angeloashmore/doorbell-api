@@ -24,7 +24,7 @@ module Doorbell
 
             @billing = command.call(plan_id: plan.id,
                                     email: email,
-                                    relation_type: relation.class.to_s,
+                                    relation_type: relation.class.to_s.underscore,
                                     relation_id: relation.id,
                                     stripe_customer_id: customer.id)
 

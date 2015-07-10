@@ -2,7 +2,7 @@ module Doorbell
   module API
     module V1
       module Presenters
-        module BillingsPresenter
+        module BillingPresenter
           include Roar::JSON
           include Grape::Roar::Representer
 
