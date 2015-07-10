@@ -28,7 +28,7 @@ gem 'grape', '~> 0.12.0'
 gem 'roar', '~> 1.0.1', require: false
 gem 'grape-roar', '~> 0.3.0'
 gem 'kaminari', '~> 0.16.3', require: 'kaminari/grape'
-gem 'mutations', '~> 0.7.2'
+gem 'oj', '~> 2.12.9'
 
 # Authentication/Authorization requirements
 gem 'jwt', '~> 1.5.1'
