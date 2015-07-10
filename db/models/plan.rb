@@ -1,5 +1,6 @@
 class Plan
   include Virtus.value_object
+  include Canable::Ables
 
   values do
     attribute :id, Integer, writer: :private
@@ -22,5 +23,17 @@ class Plan
     when :team
       return ROM.env.relation(:plans).as(:entity).default(:team).one
     end
+  end
+
+  def creatable_by?(user)
+    false
+  end
+
+  def updatable_by?(user)
+    false
+  end
+
+  def deletable_by?(user)
+    false
   end
 end
