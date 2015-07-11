@@ -3,22 +3,20 @@ module Doorbell
     module V1
       module Helpers
         module Base
-          def validate_token!
+          def validate_token!(client_id: ENV['AUTH0_CLIENT_ID'], client_secret: ENV['AUTH0_CLIENT_SECRET'])
             begin
-              auth0_client_id = ENV['AUTH0_CLIENT_ID']
-              auth0_client_secret = ENV['AUTH0_CLIENT_SECRET']
               authorization = request.headers['Authorization']
               fail InvalidTokenError if authorization.nil?
 
               token = request.headers['Authorization'].split(' ').last
               decoded_token = JWT.decode(token,
-                                         JWT.base64url_decode(auth0_client_secret))
+                                         JWT.base64url_decode(client_secret))
 
-              fail InvalidTokenError if auth0_client_id != decoded_token[0]['aud']
+              fail InvalidTokenError if client_id != decoded_token[0]['aud']
 
               @token = decoded_token.first
             rescue JWT::DecodeError
-              raise InvalidTokenError
+              fail InvalidTokenError
             end
           end
 

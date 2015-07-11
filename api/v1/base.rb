@@ -26,6 +26,7 @@ module Doorbell
         mount Doorbell::API::V1::Profiles
         mount Doorbell::API::V1::Roles
         mount Doorbell::API::V1::Teams
+        mount Doorbell::API::V1::Users
       end
     end
   end
