@@ -3,7 +3,7 @@ ROM::SQL.migration do
     create_table(:events) do
       primary_key :id
 
-      String :user_id, null: false, index: true
+      foreign_key :user_id, :users, null: false, index: true, on_delete: :cascade
 
       String :location
       String :description

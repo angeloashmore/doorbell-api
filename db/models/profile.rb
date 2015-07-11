@@ -4,7 +4,7 @@ class Profile
   values do
     attribute :id, Integer, writer: :private
 
-    attribute :user_id, String
+    attribute :user_id, Integer
     attribute :team_id, Integer
 
     attribute :title, String
@@ -15,7 +15,7 @@ class Profile
   end
 
   def viewable_by?(user)
-    return true if user_id == user
+    return true if user_id == user.id
 
     roles = ROM.env.relation(:roles).for_team(id: team_id).as(:entity)
     roles.to_a.map { |r| r.user_id }.include?(user.id)

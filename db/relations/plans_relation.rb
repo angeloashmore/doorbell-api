@@ -8,18 +8,7 @@ module Relations
     end
 
     def default(type)
-      query = where(name: 'Default')
-
-      case type
-      when :user
-        query = query.where(type: 'user')
-      when :team
-        query = query.where(type: 'team')
-      else
-        fail UnknownTypeError
-      end
-
-      query
+      where(name: 'Default').where(type: type.to_s)
     end
   end
 end

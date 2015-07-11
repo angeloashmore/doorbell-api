@@ -21,7 +21,7 @@ module Relations
     def for_teams_accessible_by_users(users)
       qualified
         .where(relation_type: 'team')
-        .inner_join(:roles, Sequel.cast(:team_id, String) => :relation_id)
+        .inner_join(:roles, :team_id => :relation_id)
         .where(roles__user_id: Array.wrap(users).map { |u| u[:id] })
         .group(:billings__id)
     end

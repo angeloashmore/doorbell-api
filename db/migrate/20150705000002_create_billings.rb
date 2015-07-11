@@ -6,7 +6,7 @@ ROM::SQL.migration do
       foreign_key :plan_id, :plans, null: false, index: true, on_delete: :set_null
 
       String :relation_type, null: false
-      String :relation_id, null: false, index: true
+      Integer :relation_id, null: false, index: true
 
       String :stripe_customer_id, null: false
       String :email, null: false

@@ -4,7 +4,7 @@ class Event
   values do
     attribute :id, Integer, writer: :private
 
-    attribute :user_id, String
+    attribute :user_id, Integer
 
     attribute :location, Hash
     attribute :description, String

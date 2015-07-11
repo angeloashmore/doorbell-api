@@ -4,8 +4,7 @@ ROM::SQL.migration do
       primary_key :id
 
       foreign_key :event_id, :events, null: false, index: true, on_delete: :cascade
-
-      String :user_id, null: false, index: true
+      foreign_key :user_id, :users, null: false, index: true, on_delete: :cascade
 
       Boolean :accepted, null: false, default: false
 

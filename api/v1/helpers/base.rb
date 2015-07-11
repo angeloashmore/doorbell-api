@@ -20,17 +20,21 @@ module Doorbell
             end
           end
 
-          def current_user_id
-            return @current_user_id unless @current_user_id.nil?
+          def current_user_remote_id
+            return @current_user_remote_id unless @current_user_remote_id.nil?
 
             fail NoTokenError if !@token
-            current_user_id = @token['sub']
-            fail InvalidTokenError if current_user_id.nil?
-            @current_user_id = current_user_id
+            current_user_remote_id = @token['sub']
+            fail InvalidTokenError if current_user_remote_id.nil?
+            @current_user_remote_id = current_user_remote_id
           end
 
           def current_user
-            @current_user ||= User.new(id: current_user_id)
+            return @current_user unless @current_user.nil?
+
+            users = ROM.env.relation(:users)
+            user = users.by_remote_id(current_user_remote_id).as(:entity)
+            @current_user = user.one
           end
         end
       end

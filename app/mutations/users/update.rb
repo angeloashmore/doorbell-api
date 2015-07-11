@@ -7,7 +7,6 @@ module Doorbell
         end
 
         optional do
-          string :name
           string :email, matches: EmailRegex::EMAIL_ADDRESS_REGEX
         end
 

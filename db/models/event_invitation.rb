@@ -5,7 +5,7 @@ class EventInvitation
     attribute :id, Integer, writer: :private
 
     attribute :event_id, Integer
-    attribute :user_id, String
+    attribute :user_id, Integer
 
     attribute :accepted, Boolean
 

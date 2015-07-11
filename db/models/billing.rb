@@ -7,7 +7,7 @@ class Billing
 
     attribute :plan_id, Integer
     attribute :relation_type, String
-    attribute :relation_id, String
+    attribute :relation_id, Integer
 
     attribute :stripe_customer_id, String
     attribute :email, String
@@ -28,10 +28,10 @@ class Billing
   end
 
   def viewable_by?(user)
-    case type
-    when :user
-      user_id == user.id
-    when :team
+    case relation_type
+    when 'user'
+      relation_id == user.id
+    when 'team'
       roles = ROM.env.relation(:roles).as(:entity).for_team(team_id).for_user(user.id)
       !roles.to_a.empty?
     else
@@ -44,10 +44,10 @@ class Billing
   end
 
   def updatable_by?(user)
-    case type
-    when :user
-      user_id == user.id
-    when :team
+    case relation_type
+    when 'user'
+      relation_id == user.id
+    when 'team'
       roles = ROM.env.relation(:roles).as(:entity).for_team(team_id).for_user(user.id)
       role_names = roles.to_a.map { |r| r.name }
       !(role_names & ['owner', 'billing']).empty?

@@ -7,7 +7,7 @@ class Role
     attribute :id, Integer, writer: :private
 
     attribute :team_id, Integer
-    attribute :user_id, String
+    attribute :user_id, Integer
 
     attribute :name, String
 
@@ -20,7 +20,7 @@ class Role
   end
 
   def viewable_by?(user)
-    return true if user_id == user
+    return true if user_id == user.id
 
     roles = ROM.env.relation(:roles).for_team(id: team_id).for_user(user).as(:entity).to_a
     !roles.empty?
