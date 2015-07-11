@@ -1,6 +1,6 @@
 module Doorbell
   module Mutation
-    module Teams
+    module Users
       class View < Mutations::Command
         optional do
           integer :id
