@@ -14,6 +14,7 @@ module Doorbell
           post do
             validate_token!(client_id: ENV['DOORBELL_CLIENT_ID'],
                             client_secret: ENV['DOORBELL_CLIENT_SECRET'])
+            p @token
             enforce_create_permission(User.new)
             args = {
               remote_id: @token['user_id'],
