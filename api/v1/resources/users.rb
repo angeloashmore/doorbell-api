@@ -12,6 +12,7 @@ module Doorbell
 
           desc 'Create a user.'
           post do
+            p request.headers['Authorization']
             validate_token!(client_id: ENV['DOORBELL_CLIENT_ID'],
                             client_secret: ENV['DOORBELL_CLIENT_SECRET'])
             enforce_create_permission(User.new)
