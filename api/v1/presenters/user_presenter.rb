@@ -10,7 +10,6 @@ module Doorbell
 
           property :remote_id
 
-          property :name
           property :email
 
           property :created_at

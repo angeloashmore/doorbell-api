@@ -4,7 +4,6 @@ module Doorbell
       class Create < Mutations::Command
         required do
           string :remote_id
-          string :name
           string :email, match: EmailRegex::EMAIL_ADDRESS_REGEX
         end
 
