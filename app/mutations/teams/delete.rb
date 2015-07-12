@@ -7,9 +7,13 @@ module Doorbell
         end
 
         def execute
+          billing = ROM.env.relation(:billings).for_type(:team).for_relation(team).one
           command = ROM.env.command(:teams).delete.by_id(team.id)
 
-          command.transaction { command.call }
+          command.transaction do
+            command.call
+            Doorbell::Mutation::Billings::Delete.run!(billing.id)
+          end
 
           team
         end

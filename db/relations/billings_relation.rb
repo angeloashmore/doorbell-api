@@ -14,7 +14,7 @@ module Relations
     alias_method :for_relation, :for_relations
 
     def for_types(types)
-      where(relation_type: Array.wrap(types).map { |t| t.to_s.classify })
+      where(relation_type: Array.wrap(types).map { |t| t.to_s })
     end
     alias_method :for_type, :for_types
 
