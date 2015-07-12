@@ -12,7 +12,7 @@ module Doorbell
 
           command.transaction do
             command.call
-            Doorbell::Mutation::Billings::Delete.run!(billing.id)
+            Doorbell::Mutation::Billings::Delete.run!(billing: billing)
           end
 
           team
