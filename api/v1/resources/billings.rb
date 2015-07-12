@@ -30,6 +30,13 @@ module Doorbell
               billing = Mutation::Billings::Update.run!(params.to_h.merge(billing: @billing))
               present billing, with: Presenters::BillingPresenter
             end
+
+            desc "Update a billing's card."
+            put :card do
+              enforce_update_permission(@billing, 'Can only be updated by owner.')
+              billing = Mutation::Billings::ReplaceCard.run!(params.to_h.merge(billing: @billing))
+              present billing, with: Presenters::BillingPresenter
+            end
           end
         end
       end

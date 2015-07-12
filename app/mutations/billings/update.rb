@@ -8,10 +8,6 @@ module Doorbell
 
         optional do
           string :email, matches: EmailRegex::EMAIL_ADDRESS_REGEX
-          string :brand
-          string :last4
-          string :exp_month
-          string :exp_year
         end
 
         def execute
