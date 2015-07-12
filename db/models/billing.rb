@@ -32,7 +32,7 @@ class Billing
     when 'user'
       relation_id == user.id
     when 'team'
-      roles = ROM.env.relation(:roles).as(:entity).for_team(team_id).for_user(user.id)
+      roles = ROM.env.relation(:roles).for_team(id: relation_id).for_user(id: user.id).as(:entity)
       !roles.to_a.empty?
     else
       false
@@ -48,7 +48,7 @@ class Billing
     when 'user'
       relation_id == user.id
     when 'team'
-      roles = ROM.env.relation(:roles).as(:entity).for_team(team_id).for_user(user.id)
+      roles = ROM.env.relation(:roles).for_team(id: relation_id).for_user(id: user.id).as(:entity)
       role_names = roles.to_a.map { |r| r.name }
       !(role_names & ['owner', 'billing']).empty?
     else
