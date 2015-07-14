@@ -5,10 +5,12 @@ module Doorbell
         optional do
           integer :id
           model :user
+          boolean :all_accessible_for_user
         end
 
         def execute
           roles = ROM.env.relation(:roles).as(:entity)
+          teams = ROM.env.relation(:teams).as(:entity)
 
           if id_present?
             role = roles.by_id(id)
@@ -16,7 +18,15 @@ module Doorbell
           end
 
           if user_present?
-            roles = roles.for_user(user)
+            if all_accessible_for_user
+              teams = teams.for_user(user).to_a
+              p teams.to_a
+              roles = roles.for_teams(teams)
+              p roles.to_a
+            else
+              roles = roles.for_user(user)
+            end
+
             return roles.to_a
           end
 

@@ -9,7 +9,7 @@ module Doorbell
 
           desc 'Return all roles for current user.'
           get do
-            roles = Mutation::Roles::View.run!(user: current_user)
+            roles = Mutation::Roles::View.run!(user: current_user, all_accessible_for_user: true)
             present roles, with: Presenters::RolesPresenter
           end
 
