@@ -20,9 +20,7 @@ module Doorbell
           if user_present?
             if all_accessible_for_user
               teams = teams.for_user(user).to_a
-              p teams.to_a
               roles = roles.for_teams(teams)
-              p roles.to_a
             else
               roles = roles.for_user(user)
             end
