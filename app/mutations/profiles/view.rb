@@ -9,6 +9,7 @@ module Doorbell
 
         def execute
           profiles = ROM.env.relation(:profiles).as(:entity)
+          teams = ROM.env.relation(:teams).as(:entity)
 
           if id_present?
             profile = profiles.by_id(id)
@@ -16,7 +17,8 @@ module Doorbell
           end
 
           if user_present?
-            profiles = profiles.for_user(user)
+            teams = teams.for_user(user)
+            profiles = profiles.for_teams(teams)
             return profiles.to_a
           end
 
