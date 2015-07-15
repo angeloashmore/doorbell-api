@@ -11,6 +11,7 @@ module Doorbell
           property :remote_id
 
           property :email
+          property :name
 
           property :created_at
           property :updated_at

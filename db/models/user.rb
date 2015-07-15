@@ -9,6 +9,7 @@ class User
     attribute :remote_id, String, writable: false
 
     attribute :email, String
+    attribute :name, String
 
     attribute :created_at, DateTime, writer: :private
     attribute :updated_at, DateTime, writer: :private

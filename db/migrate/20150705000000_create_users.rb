@@ -6,6 +6,7 @@ ROM::SQL.migration do
       String :remote_id, null: false, index: true, unique: true
 
       String :email, null: false
+      String :name
 
       DateTime :created_at, null: false
       DateTime :updated_at, null: false

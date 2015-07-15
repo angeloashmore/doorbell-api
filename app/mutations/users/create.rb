@@ -7,6 +7,10 @@ module Doorbell
           string :email, match: EmailRegex::EMAIL_ADDRESS_REGEX
         end
 
+        optional do
+          string :name
+        end
+
         def execute
           command = ROM.env.command(:users).as(:entity).create
 
