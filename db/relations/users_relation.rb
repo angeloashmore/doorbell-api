@@ -10,5 +10,12 @@ module Relations
     def by_remote_id(id)
       where(remote_id: id)
     end
+
+    def for_teams(teams)
+      qualified
+        .inner_join(:roles, user_id: :id)
+        .where(roles__team_id: Array.wrap(teams).map { |t| t[:id] })
+    end
+    alias_method :for_team, :for_teams
   end
 end

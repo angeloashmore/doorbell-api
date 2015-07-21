@@ -6,7 +6,7 @@ module Doorbell
           desc 'Return all users.'
           get do
             validate_token!
-            users = Mutation::Users::View.run!
+            users = Mutation::Users::View.run!(user: current_user)
             present users, with: Presenters::UsersPresenter
           end
 

@@ -4,17 +4,25 @@ module Doorbell
       class View < Mutations::Command
         optional do
           integer :id
+          model :user
         end
 
         def execute
           users = ROM.env.relation(:users).as(:entity)
+          teams = ROM.env.relation(:teams).as(:entity)
 
           if id_present?
-            user = users.by_id(id)
-            return user.one
+            user_ = users.by_id(id)
+            return user_.one
           end
 
-          return users.to_a
+          if user_present?
+            teams = teams.for_user(user)
+            users = users.for_teams(teams)
+            return users.to_a
+          end
+
+          fail Mutations::ValidationException
         end
       end
     end
