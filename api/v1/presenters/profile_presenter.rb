@@ -12,6 +12,7 @@ module Doorbell
           property :team_id
 
           property :title
+          property :email
           property :private
 
           property :created_at

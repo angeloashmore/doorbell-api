@@ -8,6 +8,7 @@ class Profile
     attribute :team_id, Integer
 
     attribute :title, String
+    attribute :email, String
     attribute :private, Boolean
 
     attribute :created_at, DateTime, writer: :private

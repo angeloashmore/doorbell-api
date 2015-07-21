@@ -7,6 +7,7 @@ ROM::SQL.migration do
       foreign_key :user_id, :users, null: false, index: true, on_delete: :cascade
 
       String :title
+      String :email, null: false
       Boolean :private, null: false, default: false
 
       DateTime :created_at, null: false
