@@ -15,6 +15,9 @@ module Doorbell
             @role = command.call(user_id: user.id,
                                  team_id: team.id,
                                  name: name)
+
+            Doorbell::Mutation::Profiles::Create.run!(team: team,
+                                                      user: user)
           end
 
           @role

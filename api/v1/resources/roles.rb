@@ -13,6 +13,18 @@ module Doorbell
             present roles, with: Presenters::RolesPresenter
           end
 
+          desc 'Create a role.'
+          post do
+            enforce_create_permission(Role.new(team_id: params[:team_id]), 'Can only be created by team owner or admin.')
+            args = {
+              team: Team.new(id: params[:team_id]),
+              user: Mutation::Users::View.run!(email: params[:email]),
+              name: "member"
+            }
+            role = Mutation::Roles::Create.run!(args)
+            present role, with: Presenters::RolePresenter
+          end
+
           route_param :id do
             before do
               @role = Mutation::Roles::View.run!(id: params[:id])

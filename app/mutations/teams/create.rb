@@ -19,9 +19,6 @@ module Doorbell
                                                    name: 'owner')
 
             Doorbell::Mutation::Billings::Create.run!(team: @team)
-
-            Doorbell::Mutation::Profiles::Create.run!(team: @team,
-                                                      user: user)
           end
 
           View.run!(id: @team.id)

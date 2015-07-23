@@ -11,6 +11,10 @@ module Relations
       where(remote_id: id)
     end
 
+    def by_email(email)
+      where(email: email)
+    end
+
     def for_teams(teams)
       qualified
         .inner_join(:roles, user_id: :id)

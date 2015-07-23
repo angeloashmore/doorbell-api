@@ -5,6 +5,7 @@ module Doorbell
         optional do
           integer :id
           model :user
+          string :email
         end
 
         def execute
@@ -13,6 +14,11 @@ module Doorbell
 
           if id_present?
             user_ = users.by_id(id)
+            return user_.one
+          end
+
+          if email_present?
+            user_ = users.by_email(email)
             return user_.one
           end
 
