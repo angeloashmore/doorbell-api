@@ -6,7 +6,7 @@ module Doorbell
           model :user
           model :team
           boolean :private, default: false
-          hash :roles do
+          hash :roles, default: {} do
             boolean :*
           end
         end
