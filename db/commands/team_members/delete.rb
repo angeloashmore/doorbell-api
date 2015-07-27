@@ -1,7 +1,7 @@
 module Commands
-  module Role
+  module TeamMember
     class Delete < ROM::Commands::Delete[:sql]
-      relation :roles
+      relation :team_members
       register_as :delete
       result :one
     end

@@ -1,7 +1,7 @@
 module Commands
-  module Profile
+  module TeamMember
     class Create < ROM::Commands::Create[:sql]
-      relation :profiles
+      relation :team_members
       register_as :create
       result :one
     end

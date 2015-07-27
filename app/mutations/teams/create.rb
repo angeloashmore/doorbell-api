@@ -14,9 +14,9 @@ module Doorbell
           command.transaction do
             @team = command.call(inputs.except(:user))
 
-            Doorbell::Mutation::Roles::Create.run!(team: @team,
-                                                   user: user,
-                                                   name: 'owner')
+            Doorbell::Mutation::TeamMembers::Create.run!(team: @team,
+                                                         user: user,
+                                                         roles: { owner: true })
 
             Doorbell::Mutation::Billings::Create.run!(team: @team)
           end

@@ -8,8 +8,6 @@ class Team
     attribute :name, String
     attribute :email, String
 
-    attribute :roles, Array[Role]
-
     attribute :created_at, DateTime, writer: :private
     attribute :updated_at, DateTime, writer: :private
   end

@@ -2,15 +2,20 @@ module Doorbell
   module API
     module V1
       module Presenters
-        module RolePresenter
+        module TeamMemberPresenter
           include Roar::JSON
           include Grape::Roar::Representer
 
           property :id
 
-          property :team_id
           property :user_id
-          property :name
+          property :team_id
+
+          property :title
+          property :email
+          property :private
+
+          property :roles_mask
 
           property :created_at
           property :updated_at

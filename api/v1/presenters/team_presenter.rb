@@ -11,8 +11,6 @@ module Doorbell
           property :name
           property :email
 
-          collection :roles, extend: RolePresenter
-
           property :created_at
           property :updated_at
         end

@@ -1,7 +1,7 @@
 module Commands
-  module Profile
+  module TeamMember
     class Update < ROM::Commands::Update[:sql]
-      relation :profiles
+      relation :team_members
       register_as :update
       result :one
     end

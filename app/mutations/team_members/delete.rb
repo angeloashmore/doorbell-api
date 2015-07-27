@@ -1,17 +1,17 @@
 module Doorbell
   module Mutation
-    module Roles
+    module TeamMembers
       class Delete < Mutations::Command
         required do
-          model :role
+          model :team_member
         end
 
         def execute
-          command = ROM.env.command(:roles).delete.by_id(role.id)
+          command = ROM.env.command(:team_members).delete.by_id(team_member.id)
 
           command.transaction { command.call }
 
-          role
+          team_member
         end
       end
     end

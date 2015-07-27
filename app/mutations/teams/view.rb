@@ -8,16 +8,15 @@ module Doorbell
         end
 
         def execute
-          teams = ROM.env.relation(:teams).as(:entity_with_roles)
-          roles = ROM.env.relation(:roles)
+          teams = ROM.env.relation(:teams).as(:entity)
 
           if id_present?
-            team = teams.by_id(id).combine(roles.for_team)
+            team = teams.by_id(id)
             return team.one
           end
 
           if user_present?
-            teams = teams.for_user(user).combine(roles.for_teams)
+            teams = teams.for_user(user)
             return teams.to_a
           end
 

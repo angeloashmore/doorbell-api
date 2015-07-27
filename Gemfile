@@ -33,6 +33,7 @@ gem 'oj', '~> 2.12.9'
 # Authentication/Authorization requirements
 gem 'jwt', '~> 1.5.1'
 gem 'canable', '~> 0.3.0'
+gem 'bitmask', '~> 0.1.0'
 
 # Persistence requirements
 gem 'virtus', '~> 1.0.5'

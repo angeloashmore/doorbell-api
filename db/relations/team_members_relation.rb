@@ -1,7 +1,7 @@
 module Relations
-  class Roles < ROM::Relation[:sql]
-    register_as :roles
-    dataset :roles
+  class TeamMembers < ROM::Relation[:sql]
+    register_as :team_members
+    dataset :team_members
 
     def by_id(id)
       where(id: id)

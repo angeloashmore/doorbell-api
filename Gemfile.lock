@@ -14,6 +14,7 @@ GEM
       descendants_tracker (~> 0.0.4)
       ice_nine (~> 0.11.0)
       thread_safe (~> 0.3, >= 0.3.1)
+    bitmask (0.1.0)
     builder (3.2.2)
     canable (0.3.0)
     codeclimate-test-reporter (0.4.7)
@@ -151,6 +152,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  bitmask (~> 0.1.0)
   canable (~> 0.3.0)
   codeclimate-test-reporter
   database_cleaner

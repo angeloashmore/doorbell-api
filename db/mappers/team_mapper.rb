@@ -5,15 +5,4 @@ module Mappers
 
     model Team
   end
-
-  class TeamEntityWithRoles < ROM::Mapper
-    register_as :entity_with_roles
-    relation :teams
-
-    model Team
-
-    combine :roles, on: { id: :team_id } do
-      model Role
-    end
-  end
 end
