@@ -13,15 +13,27 @@ class Team
   end
 
   def viewable_by?(user)
-    roles.map { |r| r.user_id }.include?(user.id)
+    !_team_member_for_user(user).nil?
   end
 
   def updatable_by?(user)
-    role_names = roles.select { |r| r.user_id == user.id }.map { |r| r.name }
-    !(role_names & ['owner', 'admin']).empty?
+    roles_mask = _roles_mask_for_user(user)
+    roles_mask.get(:owner) || roles_mask.get(:admin)
   end
 
   def deletable_by?(user)
-    roles.select { |r| r.user_id == user.id }.map { |r| r.name }.include?('owner')
+    _roles_mask_for_user(user).get(:owner)
+  end
+
+  private
+
+  def _team_member_for_user(user)
+    team_members = ROM.env.relation(:team_members).for_team(id: id).as(:entity)
+    team_members.for_user(id: user.id).one
+  end
+
+  def _roles_mask_for_user(user)
+    team_member = _team_member_for_user(user)
+    Bitmask.new(TeamMember.roles, team_member.roles_mask)
   end
 end

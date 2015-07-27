@@ -17,8 +17,8 @@ module Relations
 
     def for_teams(teams)
       qualified
-        .inner_join(:roles, user_id: :id)
-        .where(roles__team_id: Array.wrap(teams).map { |t| t[:id] })
+        .inner_join(:team_members, user_id: :id)
+        .where(team_members__team_id: Array.wrap(teams).map { |t| t[:id] })
     end
     alias_method :for_team, :for_teams
   end

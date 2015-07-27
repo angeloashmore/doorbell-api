@@ -32,8 +32,7 @@ class Billing
     when 'user'
       relation_id == user.id
     when 'team'
-      roles = ROM.env.relation(:roles).for_team(id: relation_id).for_user(id: user.id).as(:entity)
-      !roles.to_a.empty?
+      !_team_member_for_user(user).nil?
     else
       false
     end
@@ -48,9 +47,8 @@ class Billing
     when 'user'
       relation_id == user.id
     when 'team'
-      roles = ROM.env.relation(:roles).for_team(id: relation_id).for_user(id: user.id).as(:entity)
-      role_names = roles.to_a.map { |r| r.name }
-      !(role_names & ['owner', 'billing']).empty?
+      roles_mask = _roles_mask_for_user(user)
+      roles_mask.get(:owner) || roles_mask.get(:billing)
     else
       false
     end
@@ -58,5 +56,17 @@ class Billing
 
   def deletable_by?(user)
     false
+  end
+
+  private
+
+  def _team_member_for_user(user)
+    team_members = ROM.env.relation(:team_members).for_team(id: relation_id).as(:entity)
+    team_members.for_user(id: user.id).one
+  end
+
+  def _roles_mask_for_user(user)
+    team_member = _team_member_for_user(user)
+    Bitmask.new(TeamMember.roles, team_member.roles_mask)
   end
 end

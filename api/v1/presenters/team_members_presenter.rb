@@ -6,7 +6,7 @@ module Doorbell
           include Roar::JSON
           include Grape::Roar::Representer
 
-          collection :to_a, extend: TeamMemberPresenter, as: :profiles
+          collection :to_a, extend: TeamMemberPresenter, as: :team_members
         end
       end
     end

@@ -9,7 +9,6 @@ module Doorbell
 
           desc 'Return all team members for current user.'
           get do
-            p current_user
             team_members = Mutation::TeamMembers::View.run!(user: current_user, all_accessible_for_user: true)
             present team_members, with: Presenters::TeamMembersPresenter
           end

@@ -21,8 +21,8 @@ module Relations
     def for_teams_accessible_by_users(users)
       qualified
         .where(relation_type: 'team')
-        .inner_join(:roles, :team_id => :relation_id)
-        .where(roles__user_id: Array.wrap(users).map { |u| u[:id] })
+        .inner_join(:team_members, :team_id => :relation_id)
+        .where(team_members__user_id: Array.wrap(users).map { |u| u[:id] })
         .group(:billings__id)
     end
     alias_method :for_teams_accessible_by_user, :for_teams_accessible_by_users
