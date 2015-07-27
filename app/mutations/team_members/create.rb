@@ -19,7 +19,7 @@ module Doorbell
         def execute
           command = ROM.env.command(:team_members).as(:entity).create
 
-          roles_mask = Bitmask.new(TeamMember.roles, roles).to_i
+          roles_mask = Bitmask.new(TeamMember.roles, roles.deep_symbolize_keys).to_i
           team_member = TeamMember.new(user_id: user.id,
                                        team_id: team.id,
                                        title: title,
@@ -28,7 +28,7 @@ module Doorbell
                                        private: inputs[:private])
 
           command.transaction do
-            @team_member = command.call(team_member.to_h)
+            @team_member = command.call(team_member.to_h.except(:id))
           end
 
           @team_member
