@@ -3,13 +3,6 @@ module Doorbell
     module V1
       class Users < Grape::API
         resource :users do
-          desc 'Return all users.'
-          get do
-            validate_token!
-            users = Mutation::Users::View.run!(user: current_user)
-            present users, with: Presenters::UsersPresenter
-          end
-
           desc 'Create a user.'
           post do
             validate_token!(client_id: ENV['DOORBELL_CLIENT_ID'],
@@ -22,13 +15,6 @@ module Doorbell
           route_param :id do
             before do
               @user = Mutation::Users::View.run!(id: params[:id])
-            end
-
-            desc 'Return a user.'
-            get do
-              validate_token!
-              enforce_view_permission(@user)
-              present @user, with: Presenters::UserPresenter
             end
 
             desc 'Update a user.'

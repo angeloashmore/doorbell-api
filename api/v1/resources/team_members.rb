@@ -7,12 +7,6 @@ module Doorbell
             validate_token!
           end
 
-          desc 'Return all team members for current user.'
-          get do
-            team_members = Mutation::TeamMembers::View.run!(user: current_user, all_accessible_for_user: true)
-            present team_members, with: Presenters::TeamMembersPresenter
-          end
-
           desc 'Create a team member.'
           post do
             enforce_create_permission(TeamMember.new(team_id: params[:team_id]), 'Can only be created by team owner or admin.')
@@ -27,12 +21,6 @@ module Doorbell
           route_param :id do
             before do
               @team_member = Mutation::TeamMembers::View.run!(id: params[:id])
-            end
-
-            desc 'Return a team member.'
-            get do
-              enforce_view_permission(@team_member, 'Can only be viewed by owner or team member.')
-              present @team_member, with: Presenters::TeamMemberPresenter
             end
 
             desc 'Update a team member.'

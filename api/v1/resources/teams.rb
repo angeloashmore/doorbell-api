@@ -7,12 +7,6 @@ module Doorbell
             validate_token!
           end
 
-          desc 'Return all teams for current user.'
-          get do
-            teams = Mutation::Teams::View.run!(user: current_user)
-            present teams, with: Presenters::TeamsPresenter
-          end
-
           desc 'Create a team.'
           post do
             enforce_create_permission(Team.new, 'Team limit reached.')
@@ -23,12 +17,6 @@ module Doorbell
           route_param :id do
             before do
               @team = Mutation::Teams::View.run!(id: params[:id])
-            end
-
-            desc 'Return a team.'
-            get do
-              enforce_view_permission(@team, 'Can only be viewed by members.')
-              present @team, with: Presenters::TeamPresenter
             end
 
             desc 'Update a team.'

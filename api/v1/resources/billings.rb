@@ -7,21 +7,9 @@ module Doorbell
             validate_token!
           end
 
-          desc 'Return all billings for current user.'
-          get do
-            billings = Mutation::Billings::View.run!(user: current_user)
-            present billings, with: Presenters::BillingsPresenter
-          end
-
           route_param :id do
             before do
               @billing = Mutation::Billings::View.run!(id: params[:id])
-            end
-
-            desc 'Return a billing.'
-            get do
-              enforce_view_permission(@billing, 'Can only be viewed by owner or team member.')
-              present @billing, with: Presenters::BillingPresenter
             end
 
             desc 'Update a billing.'

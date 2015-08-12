@@ -22,7 +22,6 @@ module Doorbell
 
         # Mount all resource APIs.
         mount Doorbell::API::V1::Billings
-        mount Doorbell::API::V1::Plans
         mount Doorbell::API::V1::Teams
         mount Doorbell::API::V1::TeamMembers
         mount Doorbell::API::V1::Users
