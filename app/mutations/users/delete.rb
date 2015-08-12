@@ -9,7 +9,9 @@ module Doorbell
         def execute
           command = ROM.env.command(:users).delete.by_id(user.id)
 
-          command.transaction { command.call }
+          begin
+            command.call
+          end
 
           user
         end

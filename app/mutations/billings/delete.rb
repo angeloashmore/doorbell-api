@@ -9,7 +9,9 @@ module Doorbell
         def execute
           command = ROM.env.command(:billings).delete.by_id(billing.id)
 
-          command.transaction { command.call }
+          begin
+            command.call
+          end
 
           billing
         end

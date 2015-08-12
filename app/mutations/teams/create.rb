@@ -11,7 +11,7 @@ module Doorbell
         def execute
           command = ROM.env.command(:teams).as(:entity).create
 
-          command.transaction do
+          begin
             @team = command.call(inputs.except(:user))
 
             Doorbell::Mutation::TeamMembers::Create.run!(team: @team,

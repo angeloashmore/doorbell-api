@@ -18,7 +18,7 @@ module Doorbell
 
           command = ROM.env.command(:billings).as(:entity).create
 
-          command.transaction do
+          begin
             customer = Stripe::Customer.create(email: email,
                                                plan: plan.stripe_plan_id)
 

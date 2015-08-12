@@ -10,7 +10,7 @@ module Doorbell
         def execute
           command = ROM.env.command(:billings).as(:entity).update.by_id(billing.id)
 
-          command.transaction do
+          begin
             customer = Stripe::Customer.retrieve(billing.stripe_customer_id)
             customer.source = stripe_token
             customer.save

@@ -13,7 +13,7 @@ module Doorbell
         def execute
           command = ROM.env.command(:users).as(:entity).update.by_id(user.id)
 
-          command.transaction do
+          begin
             self.user = command.call(inputs.except(:user))
           end
 

@@ -27,7 +27,7 @@ module Doorbell
                                        roles_mask: roles_mask,
                                        private: inputs[:private])
 
-          command.transaction do
+          begin
             @team_member = command.call(team_member.to_h.except(:id))
           end
 

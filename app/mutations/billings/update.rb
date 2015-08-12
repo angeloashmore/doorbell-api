@@ -13,7 +13,7 @@ module Doorbell
         def execute
           command = ROM.env.command(:billings).as(:entity).update.by_id(billing.id)
 
-          command.transaction do
+          begin
             self.billing = command.call(inputs.except(:billing))
           end
 
