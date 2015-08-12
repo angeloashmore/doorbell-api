@@ -1,8 +1,8 @@
 require 'rubygems'
 require 'bundler'
-require 'rom/sql/rake_task'
 require_relative 'db/db'
 require 'dotenv/tasks'
+require 'rspec/core/rake_task'
 
 Bundler.require
 
@@ -14,10 +14,11 @@ rescue Bundler::BundlerError => e
   exit e.status_code
 end
 
-task :environment do
-  ENV['RACK_ENV'] ||= 'development'
-  require_relative 'config/environment'
-end
+RSpec::Core::RakeTask.new(:spec)
+task default: [:ci]
+
+desc 'Run CI tasks'
+task ci: [:spec]
 
 desc 'API Routes'
 task routes: :environment do

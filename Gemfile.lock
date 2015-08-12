@@ -30,7 +30,6 @@ GEM
     coercible (1.0.0)
       descendants_tracker (~> 0.0.1)
     daemons (1.2.3)
-    database_cleaner (1.4.1)
     descendants_tracker (0.0.4)
       thread_safe (~> 0.3, >= 0.3.1)
     diff-lcs (1.2.5)
@@ -161,7 +160,6 @@ DEPENDENCIES
   bitmask (~> 0.1.0)
   canable (~> 0.3.0)
   codeclimate-test-reporter
-  database_cleaner
   dotenv (~> 2.0.2)
   email_regex (~> 0.0.1)
   grape (~> 0.12.0)
