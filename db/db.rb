@@ -4,7 +4,6 @@ module DB
     load_files
 
     ROM.finalize.env
-    ROM.env.gateways[:default].run_migrations
   end
 
   def setup_connection_to_db
@@ -19,21 +18,21 @@ module DB
   private
 
   def production_settings
-    host = ENV.fetch('POSTGRESQL_HOST')
-    db = ENV.fetch('POSTGRESQL_DATABASE')
-    user = ENV.fetch('POSTGRESQL_USER')
-    password = ENV.fetch('POSTGRESQL_PASSWORD')
-    uri = "postgres://#{host}/#{db}?user=#{user}&password=#{password}"
-    ROM.setup(:sql, uri)
+    options = {
+      host: ENV.fetch('RETHINKDB_HOST'),
+      port: ENV.fetch('RETHINKDB_PORT'),
+      db: ENV.fetch('RETHINKDB_DATABASE')
+    }
+    ROM.setup(:rethinkdb, options)
   end
 
   def dev_settings
-    host = ENV.fetch('POSTGRESQL_HOST')
-    db = ENV.fetch('POSTGRESQL_DATABASE')
-    user = ENV.fetch('POSTGRESQL_USER')
-    password = ENV.fetch('POSTGRESQL_PASSWORD')
-    uri = "postgres://#{host}/#{db}?user=#{user}&password=#{password}"
-    ROM.setup(:sql, uri)
+    options = {
+      host: ENV.fetch('RETHINKDB_HOST'),
+      port: ENV.fetch('RETHINKDB_PORT'),
+      db: ENV.fetch('RETHINKDB_DATABASE')
+    }
+    ROM.setup(:rethinkdb, options)
   end
 
   def load_files

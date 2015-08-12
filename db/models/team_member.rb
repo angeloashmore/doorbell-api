@@ -4,17 +4,17 @@ class TeamMember
   values do
     attribute :id, Integer, writer: :private
 
-    attribute :user_id, Integer
-    attribute :team_id, Integer
+    attribute :user_id, Integer, writer: :private
+    attribute :team_id, Integer, writer: :private
 
-    attribute :title, String
-    attribute :email, String
-    attribute :private, Boolean
+    attribute :title, String, writer: :private
+    attribute :email, String, writer: :private
+    attribute :private, Boolean, default: false, writer: :private
 
     attribute :roles_mask, Integer, writer: :private
 
-    attribute :created_at, DateTime, writer: :private
-    attribute :updated_at, DateTime, writer: :private
+    attribute :created_at, DateTime, default: Time.now, writer: :private
+    attribute :updated_at, DateTime, default: Time.now, writer: :private
   end
 
   # NEVER modify the values!

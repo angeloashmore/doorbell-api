@@ -1,5 +1,5 @@
 module Relations
-  class Plans < ROM::Relation[:sql]
+  class Plans < ROM::Relation[:rethinkdb]
     register_as :plans
     dataset :plans
 

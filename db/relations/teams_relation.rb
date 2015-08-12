@@ -1,5 +1,5 @@
 module Relations
-  class Teams < ROM::Relation[:sql]
+  class Teams < ROM::Relation[:rethinkdb]
     register_as :teams
     dataset :teams
 

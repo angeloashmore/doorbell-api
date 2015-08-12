@@ -1,3 +1,11 @@
+GIT
+  remote: git://github.com/rom-rb/rom-rethinkdb.git
+  revision: a2632ea05680ab8fbba97fb3a8c49b90e2b45bd9
+  specs:
+    rom-rethinkdb (0.0.1)
+      rethinkdb
+      rom (~> 0.8, >= 0.8.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -66,7 +74,6 @@ GEM
     oj (2.12.9)
     parser (2.2.2.6)
       ast (>= 1.1, < 3.0)
-    pg (0.18.2)
     powerpack (0.1.1)
     rack (1.6.4)
     rack-accept (0.4.5)
@@ -90,15 +97,13 @@ GEM
       http-cookie (>= 1.0.2, < 2.0)
       mime-types (>= 1.16, < 3.0)
       netrc (~> 0.7)
+    rethinkdb (2.1.0)
+      json
     roar (1.0.1)
       representable (>= 2.0.1, <= 3.0.0)
     rom (0.8.0)
       equalizer (~> 0.0, >= 0.0.9)
       transproc (~> 0.2, >= 0.2.4)
-    rom-sql (0.5.2)
-      equalizer (~> 0.0, >= 0.0.9)
-      rom (~> 0.8, >= 0.8.0)
-      sequel (~> 4.18)
     rspec (3.3.0)
       rspec-core (~> 3.3.0)
       rspec-expectations (~> 3.3.0)
@@ -119,9 +124,6 @@ GEM
       rainbow (>= 1.99.1, < 3.0)
       ruby-progressbar (~> 1.4)
     ruby-progressbar (1.7.5)
-    sequel (4.24.0)
-    sequel_postgresql_triggers (1.0.8)
-      sequel
     simplecov (0.10.0)
       docile (~> 1.1.0)
       json (~> 1.8)
@@ -163,7 +165,6 @@ DEPENDENCIES
   jwt (~> 1.5.1)
   mutations (~> 0.7.2)
   oj (~> 2.12.9)
-  pg (~> 0.18.2)
   rack (~> 1.6.0)
   rack-cors (~> 0.4.0)
   rack-test
@@ -172,10 +173,9 @@ DEPENDENCIES
   require_all (~> 1.3.2)
   roar (~> 1.0.1)
   rom (~> 0.8.0)
-  rom-sql (~> 0.5.2)
+  rom-rethinkdb!
   rspec
   rubocop (~> 0.32.1)
-  sequel_postgresql_triggers (~> 1.0.8)
   stripe (~> 1.23.0)
   thin (~> 1.6.3)
   virtus (~> 1.0.5)

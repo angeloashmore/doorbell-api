@@ -38,9 +38,7 @@ gem 'bitmask', '~> 0.1.0'
 # Persistence requirements
 gem 'virtus', '~> 1.0.5'
 gem 'rom', '~> 0.8.0'
-gem 'rom-sql', '~> 0.5.2'
-gem 'pg', '~> 0.18.2'
-gem 'sequel_postgresql_triggers', '~> 1.0.8'
+gem 'rom-rethinkdb', github: 'rom-rb/rom-rethinkdb'
 
 # Other requirements
 gem 'require_all', '~> 1.3.2'

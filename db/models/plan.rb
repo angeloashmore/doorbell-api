@@ -5,11 +5,11 @@ class Plan
   values do
     attribute :id, Integer, writer: :private
 
-    attribute :name, String
-    attribute :type, String
+    attribute :name, String, writer: :private
+    attribute :type, String, writer: :private
 
-    attribute :created_at, DateTime, writer: :private
-    attribute :updated_at, DateTime, writer: :private
+    attribute :created_at, DateTime, default: Time.now, writer: :private
+    attribute :updated_at, DateTime, default: Time.now, writer: :private
   end
 
   def stripe_plan_id

@@ -4,15 +4,15 @@ class User
   include Canable::Ables
 
   values do
-    attribute :id, Integer, writable: false
+    attribute :id, Integer, writer: :private
 
-    attribute :remote_id, String, writable: false
+    attribute :remote_id, String, writer: :private
 
-    attribute :email, String
-    attribute :name, String
+    attribute :email, String, writer: :private
+    attribute :name, String, writer: :private
 
-    attribute :created_at, DateTime, writer: :private
-    attribute :updated_at, DateTime, writer: :private
+    attribute :created_at, DateTime, default: Time.now, writer: :private
+    attribute :updated_at, DateTime, default: Time.now, writer: :private
   end
 
   def updatable_by?(user)

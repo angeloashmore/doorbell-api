@@ -1,5 +1,5 @@
 module Relations
-  class Billings < ROM::Relation[:sql]
+  class Billings < ROM::Relation[:rethinkdb]
     register_as :billings
     dataset :billings
 

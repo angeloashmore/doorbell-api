@@ -5,27 +5,23 @@ class Billing
   values do
     attribute :id, Integer, writer: :private
 
-    attribute :plan_id, Integer
-    attribute :relation_type, String
-    attribute :relation_id, Integer
+    attribute :plan_id, Integer, writer: :private
+    attribute :relation_type, String, writer: :private
+    attribute :relation_id, Integer, writer: :private
 
-    attribute :stripe_customer_id, String
-    attribute :email, String
+    attribute :stripe_customer_id, String, writer: :private
+    attribute :email, String, writer: :private
 
-    attribute :brand, String
-    attribute :last4, String
-    attribute :exp_month, String
-    attribute :exp_year, String
+    attribute :brand, String, writer: :private
+    attribute :last4, String, writer: :private
+    attribute :exp_month, String, writer: :private
+    attribute :exp_year, String, writer: :private
 
-    attribute :created_at, DateTime, writer: :private
-    attribute :updated_at, DateTime, writer: :private
+    attribute :created_at, DateTime, default: Time.now, writer: :private
+    attribute :updated_at, DateTime, default: Time.now, writer: :private
   end
 
-  def type
-    return :user if !user_id.nil?
-    return :team if !team_id.nil?
-    fail UnknownTypeError
-  end
+  alias_method :type, :relation_type
 
   def viewable_by?(user)
     case relation_type
