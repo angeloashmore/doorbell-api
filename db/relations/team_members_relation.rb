@@ -4,17 +4,15 @@ module Relations
     dataset :team_members
 
     def by_id(id)
-      where(id: id)
+      filter(id: id)
     end
 
-    def for_users(users)
-      where(user_id: Array.wrap(users).map { |u| u[:id] })
+    def for_user(user)
+      filter(user_id: user[:id])
     end
-    alias_method :for_user, :for_users
 
-    def for_teams(teams)
-      where(team_id: Array.wrap(teams).map { |t| t[:id] })
+    def for_team(team)
+      filter(team_id: team[:id])
     end
-    alias_method :for_team, :for_teams
   end
 end

@@ -1,5 +1,7 @@
 module DB
   def setup
+    ROM.use :auto_registration
+
     setup_connection_to_db
     load_files
 

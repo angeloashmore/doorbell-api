@@ -4,11 +4,11 @@ module Relations
     dataset :plans
 
     def by_id(id)
-      where(id: id)
+      filter(id: id)
     end
 
     def default(type)
-      where(name: 'Default').where(type: type.to_s)
+      filter(name: 'Default', type: type.to_s)
     end
   end
 end

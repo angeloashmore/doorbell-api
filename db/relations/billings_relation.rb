@@ -3,28 +3,35 @@ module Relations
     register_as :billings
     dataset :billings
 
-    def by_ids(ids)
-      where(id: Array.wrap(ids))
+    def by_id(id)
+      filter(id: id)
     end
-    alias_method :by_id, :by_ids
+
+    def by_ids(ids)
+      filter { |doc| r.expr(ids).contains(doc[:id])}
+    end
+
+    def for_relation(relation)
+      filter(relation_id: relation[:id])
+    end
 
     def for_relations(relations)
-      where(relation_id: Array.wrap(relations).map { |r| r[:id] })
+      ids = relations.map { |r| r[:id] }
+      filter { |doc| r.expr(ids).contains(doc[:id])}
     end
-    alias_method :for_relation, :for_relations
+
+    def for_type(type)
+      filter(relation_type: type.to_s)
+    end
 
     def for_types(types)
-      where(relation_type: Array.wrap(types).map { |t| t.to_s })
+      filter { |doc| r.expr(types.map(&:to_s)).contains(doc[:type])}
     end
-    alias_method :for_type, :for_types
 
-    def for_teams_accessible_by_users(users)
-      qualified
-        .where(relation_type: 'team')
-        .inner_join(:team_members, :team_id => :relation_id)
-        .where(team_members__user_id: Array.wrap(users).map { |u| u[:id] })
-        .group(:billings__id)
+    def for_teams_accessible_by_user(user)
+      filter(relation_type: 'team')
+        .eq_join(:team_id, r.table(:team_members).filter(user_id: user[:id]))
+        .without(right: :id)
     end
-    alias_method :for_teams_accessible_by_user, :for_teams_accessible_by_users
   end
 end
