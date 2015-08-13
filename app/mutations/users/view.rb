@@ -3,7 +3,7 @@ module Doorbell
     module Users
       class View < Mutations::Command
         optional do
-          integer :id
+          string :id
           string :email
         end
 
