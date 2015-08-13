@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/angeloashmore/rom-rethinkdb.git
-  revision: 06b8ee407367b5a070557f9009f8a214b3e5f2c3
+  revision: a88ce97422c160c0a279889148d421d3edabcc62
   specs:
     rom-rethinkdb (0.0.1)
       rethinkdb

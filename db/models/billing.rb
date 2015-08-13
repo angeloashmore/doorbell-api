@@ -17,8 +17,8 @@ class Billing
     attribute :exp_month, String, writer: :private
     attribute :exp_year, String, writer: :private
 
-    attribute :created_at, DateTime, default: Time.now, writer: :private
-    attribute :updated_at, DateTime, default: Time.now, writer: :private
+    attribute :created_at, Time, default: Time.now, writer: :private
+    attribute :updated_at, Time, default: Time.now, writer: :private
   end
 
   alias_method :type, :relation_type
@@ -63,6 +63,7 @@ class Billing
 
   def _roles_mask_for_user(user)
     team_member = _team_member_for_user(user)
-    Bitmask.new(TeamMember.roles, team_member.roles_mask)
+    roles_mask = team_member.nil? ? 0 : team_member.roles_mask
+    Bitmask.new(TeamMember.roles, roles_mask)
   end
 end

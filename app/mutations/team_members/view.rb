@@ -3,7 +3,7 @@ module Doorbell
     module TeamMembers
       class View < Mutations::Command
         optional do
-          integer :id
+          string :id
           model :user
           boolean :all_accessible_for_user
         end

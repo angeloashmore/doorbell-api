@@ -13,8 +13,8 @@ class TeamMember
 
     attribute :roles_mask, Integer, writer: :private
 
-    attribute :created_at, DateTime, default: Time.now, writer: :private
-    attribute :updated_at, DateTime, default: Time.now, writer: :private
+    attribute :created_at, Time, default: Time.now, writer: :private
+    attribute :updated_at, Time, default: Time.now, writer: :private
   end
 
   # NEVER modify the values!
@@ -57,7 +57,8 @@ class TeamMember
 
   def _roles_mask_for_user(user)
     team_member = _team_member_for_user(user)
-    Bitmask.new(TeamMember.roles, team_member.roles_mask)
+    roles_mask = team_member.nil? ? 0 : team_member.roles_mask
+    Bitmask.new(TeamMember.roles, roles_mask)
   end
 
   def _if_owner_or_admin(user)

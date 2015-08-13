@@ -12,6 +12,8 @@ module DB
     case ENV['RACK_ENV']
     when 'production'
       production_settings
+    when 'test'
+      test_settings
     else
       dev_settings
     end.default.connection
@@ -37,6 +39,15 @@ module DB
     ROM.setup(:rethinkdb, options)
   end
 
+  def test_settings
+    options = {
+      host: 'localhost',
+      port: 28015,
+      db: 'test_db'
+    }
+    ROM.setup(:rethinkdb, options)
+  end
+
   def load_files
     %w(models relations mappers commands).each { |dir| require_rel dir }
   end
@@ -46,5 +57,5 @@ module DB
   end
 
   module_function :setup, :setup_connection_to_db, :production_settings,
-                  :dev_settings, :load_files, :root
+                  :dev_settings, :test_settings, :load_files, :root
 end

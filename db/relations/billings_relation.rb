@@ -1,5 +1,7 @@
 module Relations
   class Billings < ROM::Relation[:rethinkdb]
+    include RethinkDB::Shortcuts
+
     register_as :billings
     dataset :billings
 
@@ -12,7 +14,8 @@ module Relations
     end
 
     def for_relation(relation)
-      filter(relation_id: relation[:id])
+      type = relation.class.to_s.underscore
+      filter(relation_type: type, relation_id: relation[:id])
     end
 
     def for_relations(relations)
@@ -26,12 +29,6 @@ module Relations
 
     def for_types(types)
       filter { |doc| r.expr(types.map(&:to_s)).contains(doc[:type])}
-    end
-
-    def for_teams_accessible_by_user(user)
-      filter(relation_type: 'team')
-        .eq_join(:team_id, r.table(:team_members).filter(user_id: user[:id]))
-        .without(right: :id)
     end
   end
 end

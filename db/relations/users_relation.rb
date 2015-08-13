@@ -16,10 +16,5 @@ module Relations
     def by_email(email)
       filter(email: email)
     end
-
-    def for_team(team)
-      eq_join(:user_id, r.table(:team_members).filter(id: team[:id]))
-        .without(right: :id)
-    end
   end
 end

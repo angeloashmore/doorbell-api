@@ -3,7 +3,7 @@ module Doorbell
     module Teams
       class View < Mutations::Command
         optional do
-          integer :id
+          string :id
           model :user
         end
 
