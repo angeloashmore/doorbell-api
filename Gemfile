@@ -36,7 +36,7 @@ gem 'bitmask', '~> 0.1.0'
 
 # Persistence requirements
 gem 'virtus', '~> 1.0.5'
-gem 'rom-rethinkdb', github: 'angeloashmore/rom-rethinkdb'
+gem 'rom-rethinkdb', github: 'rom-rb/rom-rethinkdb'
 
 # Other requirements
 gem 'require_all', '~> 1.3.2'

@@ -9,10 +9,6 @@ module Relations
       filter(id: id)
     end
 
-    def by_ids(ids)
-      filter { |doc| r.expr(ids).contains(doc[:id])}
-    end
-
     def by_email(email)
       filter(email: email)
     end

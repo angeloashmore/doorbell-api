@@ -17,12 +17,6 @@ describe Relations::Users do
     end
   end
 
-  describe '::by_ids' do
-    it 'should return the users' do
-      expect(users.by_ids([@user.id, @other_user.id]).to_a).to contain_exactly(@other_user, @user)
-    end
-  end
-
   describe '::by_email' do
     it 'should return the user' do
       expect(users.by_id(@user.id).one).to eql(@user)
