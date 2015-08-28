@@ -1,0 +1,4 @@
+# Ruby
+- src: innohub-ansible.ruby-install
+- src: innohub-ansible.chruby
+- src: innohub-ansible.ruby

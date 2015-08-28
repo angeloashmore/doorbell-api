@@ -1,0 +1,21 @@
+---
+- name: doorbell-api
+  hosts: doorbell-api
+  user: vagrant
+
+  vars:
+    ruby_install_ruby_versions:
+      - 2.2.2
+    ruby_default_version: 2.2.2
+    ruby_users:
+      - root
+      - vagrant
+
+  roles:
+    - innohub-ansible.ruby
+
+  tasks:
+    - name: Install libpq-dev for pg gem
+      apt: name=libpq-dev state=latest
+      become: yes
+      become_method: sudo
